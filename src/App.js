@@ -5,7 +5,7 @@ import './App.css';
        {    
        state = {
         hours : 0,
-        stawka : 0,
+        rate : 0,
         workdays:21,
         satsun:0,
         hollydays:0,
@@ -14,7 +14,7 @@ import './App.css';
         avaragehours:168,
         avaragemoney:3309.6,
         add:0,
-        isConfirmed:false,
+        //isConfirmed:false,
         isConfirmedPpk:false,
         temp :"brak danych",
         wiatr:"brak danych",
@@ -64,7 +64,7 @@ visibility:dane.visibility, clouds:dane.clouds.all, icon:dane.weather[0].icon, t
 }
                    handleChangeGodziny=(e)=>{this.setState({hours:e.target.value})}  
                    
-handleChangeStawka=(e)=>{this.setState({stawka:e.target.value})}
+handleChangeStawka=(e)=>{this.setState({rate:e.target.value})}
 
 handleChangeWorkdays=(e)=>{if(e.target.value.length>0){this.setState ({workdays:e.target.value})}else{this.setState({workdays:21})}}
 
@@ -82,7 +82,7 @@ handleChangeSrWyp =(e)=>{if(e.target.value.length>0){this.setState ({avaragemone
 
 handleChangeAdd=(e)=>{this.setState({add:e.target.value})}
 
-handleChangeConfirm =()=>{this.setState({isConfirmed :!this.state.isConfirmed})}
+//handleChangeConfirm =()=>{this.setState({isConfirmed :!this.state.isConfirmed})}
 
 handleChangeConfirmPpk=()=>{this.setState({isConfirmedPpk :!this.state.isConfirmedPpk})}
 
@@ -100,7 +100,7 @@ showPosition=showPosition.bind(this);
 
                         
                 render() {
-      const {hours, stawka, workdays, satsun, hollydays, illnessworkdays, illnessweekenddays, avaragehours, avaragemoney, add }=this.state;          
+      const {hours, rate, workdays, satsun, hollydays, illnessworkdays, illnessweekenddays, avaragehours, avaragemoney, add }=this.state;          
                 
               let workd =workdays-hollydays-illnessworkdays;  
  let nadgodz=hours-workd*8;
@@ -109,10 +109,10 @@ showPosition=showPosition.bind(this);
  
  
  
-                const wyliczenie =()=>{return (hours * stawka+nadgodz*stawka*0.5 + satsun *stawka*0.5+hollydays *8*avaragemoney/avaragehours+illnessworkdays*avaragemoney/30*0.8 + illnessweekenddays*avaragemoney/30*0.8+add*1);
+                const count =()=>{return (hours * rate+nadgodz*rate*0.5 + satsun *rate*0.5+hollydays *8*avaragemoney/avaragehours+illnessworkdays*avaragemoney/30*0.8 + illnessweekenddays*avaragemoney/30*0.8+add*1);
  
          }
-let brutto=Math.round(wyliczenie()*100)/100;
+let brutto=Math.round(count()*100)/100;
 let ppk;
 let ppk_bru;
 if(this.state.isConfirmedPpk)
@@ -120,10 +120,13 @@ if(this.state.isConfirmedPpk)
 {ppk=Math.round(brutto*0.02*100)/100;
 ppk_bru=Math.round(brutto*1.015*100)/100;}
 if(brutto<0) {brutto=0};
-const zus=Math.round(brutto*0.1371*100)/100;
+let zus;
+if(brutto<=14805)
+{zus=Math.round(brutto*0.1371*100)/100}else{zus=Math.round((2029.77+(brutto-14805)*0.0245)*100)/100};
+let kos_doch;
+if(brutto<250){kos_doch=brutto}else{kos_doch=250}
 const pod_zdr=brutto-zus;
-const zdr=Math.round(pod_zdr*0.09*100)/100;
-const kos_doch=250;
+let zdr=Math.round(pod_zdr*0.09*100)/100;
 let pod_zal=ppk_bru-zus-kos_doch-2500;
 
 if(ppk_bru>=5701&&ppk_bru<=8549){ 
@@ -136,7 +139,7 @@ pod_zal=pod_zal-(brutto*0.0668-380.5)/0.17
 if(pod_zal<0) {pod_zal=0};
 let zal_pod;
 
-if(this.state.isConfirmed){zal_pod=Math.ceil(pod_zal*0.32)} else if(ppk_bru>8549&&!this.state.isConfirmedPpk){zal_pod=Math.ceil(pod_zal*0.17+brutto*0.015*0.15)}else {zal_pod=Math.ceil(pod_zal*0.17)};
+if(pod_zal<=10000&&ppk_bru>8549&&!this.state.isConfirmedPpk){zal_pod=Math.ceil(pod_zal*0.17+brutto*0.015*0.15)}else if(pod_zal>10000&&pod_zal<=83333.33){zal_pod=Math.ceil((pod_zal+2500-10000)*0.32+1275)} else if(pod_zal>83333.33){zal_pod=Math.ceil((pod_zal+2500-10000)*0.32+1275+(pod_zal-83333.33)*0.04)} else{zal_pod=Math.ceil(pod_zal*0.17)};
 
 
 
@@ -146,13 +149,14 @@ let netto=Math.round((brutto-zus-zdr-zal_pod-ppk)*100)/100;
 netto=netto.toString();
 netto=netto.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 netto=netto.replace('.',' , ');
+const Netto=()=>netto;
 
 const Nasa = ()=>{if(this.state.media_type==="video"){return (<iframe title="nasa" frameBorder="0" allowFullScreen="allowFullScreen" width="100%" height="100%"
 src={this.state.nasa_vid}>
 </iframe>)} else{return (<img src={this.state.nasa} alt="FOTKA" style={{width:"95%", height:"95%"}}/>)}}
 
             
-                const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}>{netto}</span> PLN</h3>)}
+    const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}><Netto/></span> PLN</h3>)}
                 
 const data=new Date();
 const year=data.getFullYear();
@@ -224,10 +228,10 @@ switch(miesiac){
  
   <label><li>Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" placeholder="wst.3309.6" onChange={this.handleChangeSrWyp}/></li><br/></label>
   
-    <label><li>Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka<br/><input className="input" type="number" onChange={this.handleChangeAdd}/></li><br/></label>
+    <label><li>Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka.<br/>Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto<br/><input className="input" type="number" onChange={this.handleChangeAdd}/></li><br/></label>
 
 
-   <label className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br/>
+   {/*<label className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br/>*/}
        
    <label className="box"><input type='checkbox' id="ppk" onChange ={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk}/>zaznacz jeśli nie uczestniczysz w PPK</label>
    
@@ -236,7 +240,7 @@ switch(miesiac){
 
    </ol>
 
-<div className="list"><h3>Dane szczegółowe:</h3><br/><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty z funduszu pracodowcy na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br/><h6>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika (pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami)</h6></div>
+<div className="list"><h3>Dane szczegółowe:</h3><br/><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br/><h6>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika (pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami)</h6></div>
    
   <div id="footer">        
  <label><span style={{fontSize:"18px"}}>Pogoda w Twoim mieście: </span><br/><input className="input" type="text"     placeholder={this.state.cityOk} style={{width:"8em"}} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal}     style={{width:"2em",height:"1.6em",fontSize:"1.7em",borderRadius:"50%",outline:"none"}}>🛰️</button>      
