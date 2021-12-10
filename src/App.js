@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 
+const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
+const API_KEY_NASA = process.env.REACT_APP_API_KEY_NASA;
+
       class App extends React.Component
        {    
        state = {
@@ -34,14 +37,15 @@ import './App.css';
         title:"",
         media_type:"",
         nasa_vid:"",
-        }     
+        }   
+        
         
 componentDidMount(){
 
-fetch("https://api.nasa.gov/planetary/apod?api_key=TAIEBXrtT4oGNEobufjhEvUJg332acBbAmf9hKL3")
+fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY_NASA}`)
 .then(response=>response.json())
 .then(dane=>this.setState({nasa:dane.hdurl,title:dane.title,media_type:dane.media_type,nasa_vid:dane.url}));
- fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=04a91b73b71a422b152e409612f46049`)
+ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=${API_KEY_OW}`)
   .then(response=>response.json())
    .then(dane=>this.setState({temp:dane.main.temp, wiatr:dane.wind.speed, stan:dane.weather[0].description, cisnienie:dane.main.pressure, visibility:dane.visibility, clouds:dane.clouds.all, icon:dane.weather[0].icon, time:new Date(dane.dt*1000).toLocaleTimeString()})
    )
@@ -50,12 +54,12 @@ fetch("https://api.nasa.gov/planetary/apod?api_key=TAIEBXrtT4oGNEobufjhEvUJg332a
 
 componentDidUpdate(prevProps,prevState){
 if(prevState.active !== this.state.active||prevState.lat !==this.state.lat){
-fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&lang=pl&appid=8cd238073b54d7ce90d3163bb612c7cb`)
+fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&lang=pl&appid=${API_KEY_OW}`)
   .then(response=>response.json())
    .then(dane=>this.setState({cityOk:dane.name,temp:dane.main.temp,wiatr:dane.wind.speed,stan:dane.weather[0].description,cisnienie:dane.main.pressure,visibility:dane.visibility,clouds:dane.clouds.all,icon:dane.weather[0].icon,time:new Date(dane.dt*1000).toLocaleTimeString(), country:dane.sys.country})
    )
 }
-else if(prevState.city !== this.state.city) {fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=04a91b73b71a422b152e409612f46049`)
+else if(prevState.city !== this.state.city) {fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=${API_KEY_OW}`)
   .then(response=>response.json())
    .then(dane=>this.setState({temp:dane.main.temp, wiatr:dane.wind.speed, stan:dane.weather[0].description, cisnienie:dane.main.pressure,
 visibility:dane.visibility, clouds:dane.clouds.all, icon:dane.weather[0].icon, time:new Date(dane.dt*1000).toLocaleTimeString(), cityOk:dane.name, country:dane.sys.country})
@@ -100,6 +104,7 @@ showPosition=showPosition.bind(this);
 
                         
                 render() {
+                  
       const {hours, rate, workdays, satsun, hollydays, illnessworkdays, illnessweekenddays, avaragehours, avaragemoney, add }=this.state;          
                 
               let workd =workdays-hollydays-illnessworkdays;  
