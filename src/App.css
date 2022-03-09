@@ -132,3 +132,7 @@ font-weight:bold;
   background-image:linear-gradient(to right,#444, #54AD00, #94FD37, #90FF50,  #90FF50, #94FD37, #54AD00, #444);
   font-weight: 600;
 }
+img{
+  width: 2.5em;
+  height: 2.5em;
+}

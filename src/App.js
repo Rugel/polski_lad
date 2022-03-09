@@ -1,51 +1,17 @@
 import React from 'react';
 import './App.css';
 import Input from './modules/input';
+import Footer from './modules/footer';
+import wind from './icons/wind.svg';
+import temp from './icons/temperature.svg';
+import clouds from './icons/clouds.svg';
+import pressure from './icons/pressure.svg';
+import summer from './icons/summer.svg';
+import vision from './icons/vision.svg';
+
 
 const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
 const API_KEY_NASA = process.env.REACT_APP_API_KEY_NASA;
-
-const data=new Date();
-const year=data.getFullYear();
-let miesiac=data.getMonth();
-const day=data.getDate();
-switch(miesiac){
-    default : miesiac="styczeń";
- break;
- 
-    case 1 : miesiac="luty";
- break;
- 
- case 2 : miesiac="marzec";
- break;
- 
- case 3 : miesiac="kwiecień";
- break;
- 
- case 4 : miesiac="maj";
- break;
- 
- case 5 : miesiac="czerwiec";
- break;
- 
- case 6 : miesiac="lipiec";
- break;
- 
- case 7 : miesiac="sierpień";
- break;
- 
- case 8 : miesiac="wrzesień";
- break;
- 
- case 9 : miesiac="październik";
- break;
- 
- case 10 : miesiac="listopad";
- break;
- 
- case 11 : miesiac="grudzień";
- break;
-}
 
       class App extends React.Component
        {    
@@ -249,8 +215,8 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
 <article><div className="list"><h3>Dane szczegółowe:</h3><br/><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br/><h6>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</h6></div></article></section>
    
   <footer><div><label><span style={{fontSize:"18px"}}>Pogoda w Twoim mieście: </span><br/><input className="input" type="text"     placeholder={this.state.cityOk} style={{width:"8em"}} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal}     style={{width:"2em",height:"1.6em",fontSize:"1.7em",borderRadius:"50%",outline:"none"}}>🛰️</button>      
-<br/>Aktualna pogoda dla miasta <span style={{color:"#0000FF"}}>{this.state.cityOk} - {this.state.country}</span> (<span style={{color:"black", fontWeight:"100"}}>{this.state.time}</span>):<br/> 🌡️temp.: <span>{this.state.temp} &#176;C</span>     💨wiatr: <span>{this.state.wiatr} m/s</span><br/>⛱️stan: <span>{this.state.stan}</span> ⏲️ciśnienie: <span>{this.state.cisnienie} hPa</span><br/>👁️widoczność: <span>{this.state.visibility} m</span> ⛅zachmurzenie:  <span>{this.state.clouds} %</span><br/><img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon"/></div>     
- <br/><div style={{textAlign:"right",marginRight:"2%"}}><em>Wrzutka Dnia od </em><img className="img" style={{marginBottom:"-0.75em",width:"3.5em",height:"3.5em"}} src="nasa-logo.svg" alt="NASA"/></div><label><Nasa/><div style={{color:"#00F",fontSize:"1.3em",textAlign:"left",marginLeft:"2.5%"}}><em>{this.state.title}</em></div></label><br/>{day} {miesiac} {year} - &copy; Grzegorz Dychała</footer>
+<br/>Aktualna pogoda dla miasta <span style={{color:"#0000FF"}}>{this.state.cityOk} - {this.state.country}</span> (<span style={{color:"black", fontWeight:"100"}}>{this.state.time}</span>):<br/> <img src={temp} alt=""/> temp.: <span>{this.state.temp} &#176;C</span><img src={wind} alt=""/>wiatr: <span>{this.state.wiatr} m/s</span><br/> <img src={summer} alt=""/> stan: <span>{this.state.stan}</span> <img src={pressure} alt=""/>  ciśnienie: <span>{this.state.cisnienie} hPa</span><br/> <img src={vision} alt=""/> widoczność: <span>{this.state.visibility} m</span> <img src={clouds} alt=""/> zachmurzenie:  <span>{this.state.clouds} %</span><br/><img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon"/></div>     
+ <br/><div style={{textAlign:"right",marginRight:"2%"}}><em>Wrzutka Dnia od </em><img className="img" style={{marginBottom:"-0.75em",width:"3.5em",height:"3.5em"}} src="nasa-logo.svg" alt="NASA"/></div><label><Nasa/><div style={{color:"#00F",fontSize:"1.3em",textAlign:"left",marginLeft:"2.5%"}}><em>{this.state.title}</em></div></label><br/><Footer/></footer>
     </div>
                 }  
               }   
