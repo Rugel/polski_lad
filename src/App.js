@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Input from './modules/input';
 
 const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
 const API_KEY_NASA = process.env.REACT_APP_API_KEY_NASA;
@@ -213,30 +214,27 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
             <header><Wynik/></header><br/><br/><br/>
                  <nav><div id="tytul"><h2>Kalkulator Wynagrodzenia</h2><p>Polskiego Ładu (Nowego Ładu)</p><h6>wersja kalkulatora z zasadami sprzed Polskiego Ładu jest dostępna <a href='https://barytone-winter.000webhostapp.com/'>tutaj</a></h6></div></nav>
                  <section><ol>
-                     
-                 <label><li>Podaj łączną liczbę przepracowanych godzin w danym miesiącu<br/><input className="input" type="number" onChange={this.handleChangeGodziny}/></li> <br/></label>
-                     
-                 <label><li>
- Podaj twoją stawkę godzinową brutto<br/><input className="input" type="number" onChange ={this.handleChangeStawka}/></li><br/></label>
- 
-  <label><li>Podaj liczbę dni roboczych danego miesiąca<br/><input className="input" type="number" placeholder="wstp.21" onChange={this.handleChangeWorkdays}/></li><br/></label>   
-  
-    <label><li>Podaj łączną liczbę godzin przepracowanych w soboty, niedziele i święta<br/><input className="input" type="number" onChange={this.handleChangeSatsun}/></li><br/></label>
-  
- <label><li>Podaj ilość dni przebytych na urlopie<br/><input className="input" type="number" onChange={this.handleChangeUrlop}/></li><br/></label>
- 
- <label><li>Podaj ilość dni powszednich przebytych na zwolnieniu lekarskim<br/><input className="input" type="number" onChange={this.handleChangeCh1}/></li><br/>
-</label>
- 
- <label><li>Podaj ilość dni wolnych od pracy a przebytych na zwolnieniu lekarskim<br/><input className="input" type="number" onChange={this.handleChangeCh2}/></li><br/></label>
- 
- <label><li>Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" placeholder="wstp.168" onChange={this.handleChangeSrGodz}/></li><br/></label>
- 
-  <label><li>Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" placeholder="wstp.3309.6" onChange={this.handleChangeSrWyp}/></li><br/></label>
-  
-    <label><li>Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka.<br/><input className="input" type="number" onChange={this.handleChangeAdd}/></li><br/></label>
 
+   <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny}/></li>
 
+   <li><Input content='Podaj twoją stawkę godzinową brutto' method={this.handleChangeStawka}/></li>
+
+   <li><Input content='Podaj liczbę dni roboczych danego miesiąca' method={this.handleChangeWorkdays} plhld='wstp.21'/></li>
+                     
+   <li><Input content='Podaj łączną liczbę godzin przepracowanych w soboty, niedziele i święta' method={this.handleChangeSatsun}/></li>
+  
+   <li><Input content='Podaj ilość dni przebytych na urlopie' method={this.handleChangeUrlop}/></li>
+
+   <li><Input content='Podaj ilość dni powszednich przebytych na zwolnieniu lekarskim' method={this.handleChangeCh1}/></li>
+ 
+   <li><Input content='Podaj ilość dni wolnych od pracy a przebytych na zwolnieniu lekarskim' method={this.handleChangeCh2}/></li>
+ 
+   <li><Input content='Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrGodz} plhld='wstp.168'/></li>
+ 
+   <li><Input content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld='wstp.3309,6'/></li>
+ 
+   <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd}/></li>
+  
    {/*<label className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br/>*/}
        
    <label className="box"><input type='checkbox' id="ppk" onChange ={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk}/>zaznacz jeśli nie uczestniczysz w PPK</label>
@@ -246,7 +244,7 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
 
    </ol>
 
-  <div id='constInp'><label>Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto<br/><input className="input" type="number" onChange={this.handleChangeAdd}/><br/></label></div>
+  <div id='constInp'><Input content='Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto' method={this.handleChangeAdd}/></div>
 
 <article><div className="list"><h3>Dane szczegółowe:</h3><br/><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br/><h6>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</h6></div></article></section>
    
