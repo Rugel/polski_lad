@@ -4,6 +4,48 @@ import './App.css';
 const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
 const API_KEY_NASA = process.env.REACT_APP_API_KEY_NASA;
 
+const data=new Date();
+const year=data.getFullYear();
+let miesiac=data.getMonth();
+const day=data.getDate();
+switch(miesiac){
+    default : miesiac="styczeń";
+ break;
+ 
+    case 1 : miesiac="luty";
+ break;
+ 
+ case 2 : miesiac="marzec";
+ break;
+ 
+ case 3 : miesiac="kwiecień";
+ break;
+ 
+ case 4 : miesiac="maj";
+ break;
+ 
+ case 5 : miesiac="czerwiec";
+ break;
+ 
+ case 6 : miesiac="lipiec";
+ break;
+ 
+ case 7 : miesiac="sierpień";
+ break;
+ 
+ case 8 : miesiac="wrzesień";
+ break;
+ 
+ case 9 : miesiac="październik";
+ break;
+ 
+ case 10 : miesiac="listopad";
+ break;
+ 
+ case 11 : miesiac="grudzień";
+ break;
+}
+
       class App extends React.Component
        {    
        state = {
@@ -162,47 +204,7 @@ src={this.state.nasa_vid}>
            
 const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}><Netto/></span> PLN</h3>)}
     
-const data=new Date();
-const year=data.getFullYear();
-let miesiac=data.getMonth();
-const day=data.getDate();
-switch(miesiac){
-    default : miesiac="styczeń";
- break;
- 
-    case 1 : miesiac="luty";
- break;
- 
- case 2 : miesiac="marzec";
- break;
- 
- case 3 : miesiac="kwiecień";
- break;
- 
- case 4 : miesiac="maj";
- break;
- 
- case 5 : miesiac="czerwiec";
- break;
- 
- case 6 : miesiac="lipiec";
- break;
- 
- case 7 : miesiac="sierpień";
- break;
- 
- case 8 : miesiac="wrzesień";
- break;
- 
- case 9 : miesiac="październik";
- break;
- 
- case 10 : miesiac="listopad";
- break;
- 
- case 11 : miesiac="grudzień";
- break;
-}
+
 
     
                  return <div>
