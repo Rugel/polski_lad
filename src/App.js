@@ -8,10 +8,11 @@ import clouds from './icons/clouds.svg';
 import pressure from './icons/pressure.svg';
 import summer from './icons/summer.svg';
 import vision from './icons/vision.svg';
+import Nasa from './modules/nasa';
+
 
 
 const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
-const API_KEY_NASA = process.env.REACT_APP_API_KEY_NASA;
 
       class App extends React.Component
        {    
@@ -42,18 +43,12 @@ const API_KEY_NASA = process.env.REACT_APP_API_KEY_NASA;
         lat:"",
         lon:"",
         active:false,
-        nasa:"",
-        title:"",
-        media_type:"",
-        nasa_vid:"",
+        
         }   
         
         
 componentDidMount(){
 
-fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY_NASA}`)
-.then(response=>response.json())
-.then(dane=>this.setState({nasa:dane.hdurl,title:dane.title,media_type:dane.media_type,nasa_vid:dane.url}));
  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=${API_KEY_OW}`)
   .then(response=>response.json())
    .then(dane=>this.setState({temp:dane.main.temp, wiatr:dane.wind.speed, stan:dane.weather[0].description, cisnienie:dane.main.pressure, visibility:dane.visibility, clouds:dane.clouds.all, icon:dane.weather[0].icon, time:new Date(dane.dt*1000).toLocaleTimeString()})
@@ -165,9 +160,7 @@ netto=netto.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 netto=netto.replace('.',' , ');
 const Netto=()=>netto;
 
-const Nasa = ()=>{if(this.state.media_type==="video"){return (<iframe title="nasa" frameBorder="0" allowFullScreen="allowFullScreen" width="100%" height="100%"
-src={this.state.nasa_vid}>
-</iframe>)} else{return (<img src={this.state.nasa} alt="FOTKA" style={{width:"95%", height:"95%"}}/>)}}
+
            
 const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}><Netto/></span> PLN</h3>)}
     
@@ -216,7 +209,7 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
    
   <footer><div><label><span style={{fontSize:"18px"}}>Pogoda w Twoim mieście: </span><br/><input className="input" type="text"     placeholder={this.state.cityOk} style={{width:"8em"}} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal}     style={{width:"2em",height:"1.6em",fontSize:"1.7em",borderRadius:"50%",outline:"none"}}>🛰️</button>      
 <br/>Aktualna pogoda dla miasta <span style={{color:"#0000FF"}}>{this.state.cityOk} - {this.state.country}</span> (<span style={{color:"black", fontWeight:"100"}}>{this.state.time}</span>):<br/> <img src={temp} alt=""/> temp.: <span>{this.state.temp} &#176;C</span><img src={wind} alt=""/>wiatr: <span>{this.state.wiatr} m/s</span><br/> <img src={summer} alt=""/> stan: <span>{this.state.stan}</span> <img src={pressure} alt=""/>  ciśnienie: <span>{this.state.cisnienie} hPa</span><br/> <img src={vision} alt=""/> widoczność: <span>{this.state.visibility} m</span> <img src={clouds} alt=""/> zachmurzenie:  <span>{this.state.clouds} %</span><br/><img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon"/></div>     
- <br/><div style={{textAlign:"right",marginRight:"2%"}}><em>Wrzutka Dnia od </em><img className="img" style={{marginBottom:"-0.75em",width:"3.5em",height:"3.5em"}} src="nasa-logo.svg" alt="NASA"/></div><label><Nasa/><div style={{color:"#00F",fontSize:"1.3em",textAlign:"left",marginLeft:"2.5%"}}><em>{this.state.title}</em></div></label><br/><Footer/></footer>
+ <br/><Nasa/><Footer/></footer>
     </div>
                 }  
               }   
