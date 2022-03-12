@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/polski_lad/static/css/main.d2b984b8.chunk.css",
+    "main.js": "/polski_lad/static/js/main.53f4e49d.chunk.js",
+    "main.js.map": "/polski_lad/static/js/main.53f4e49d.chunk.js.map",
+    "runtime-main.js": "/polski_lad/static/js/runtime-main.089d2bda.js",
+    "runtime-main.js.map": "/polski_lad/static/js/runtime-main.089d2bda.js.map",
+    "static/js/2.0d0437e6.chunk.js": "/polski_lad/static/js/2.0d0437e6.chunk.js",
+    "static/js/2.0d0437e6.chunk.js.map": "/polski_lad/static/js/2.0d0437e6.chunk.js.map",
+    "index.html": "/polski_lad/index.html",
+    "static/css/main.d2b984b8.chunk.css.map": "/polski_lad/static/css/main.d2b984b8.chunk.css.map",
+    "static/js/2.0d0437e6.chunk.js.LICENSE.txt": "/polski_lad/static/js/2.0d0437e6.chunk.js.LICENSE.txt",
+    "static/media/clouds.79353867.svg": "/polski_lad/static/media/clouds.79353867.svg",
+    "static/media/pressure.2a84e7e2.svg": "/polski_lad/static/media/pressure.2a84e7e2.svg",
+    "static/media/summer.b2bdb99a.svg": "/polski_lad/static/media/summer.b2bdb99a.svg",
+    "static/media/temperature.12175c05.svg": "/polski_lad/static/media/temperature.12175c05.svg",
+    "static/media/vision.e6b8944b.svg": "/polski_lad/static/media/vision.e6b8944b.svg",
+    "static/media/wind.248774fb.svg": "/polski_lad/static/media/wind.248774fb.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.089d2bda.js",
+    "static/js/2.0d0437e6.chunk.js",
+    "static/css/main.d2b984b8.chunk.css",
+    "static/js/main.53f4e49d.chunk.js"
+  ]
+}
