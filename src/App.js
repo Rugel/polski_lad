@@ -117,11 +117,11 @@ showPosition=showPosition.bind(this);
  
  
  
- 
-                const count =()=>{return (hours * rate+nadgodz*rate*0.5 + satsun *rate*0.5+hollydays *8*avaragemoney/avaragehours+illnessworkdays*avaragemoney/30*0.8 + illnessweekenddays*avaragemoney/30*0.8+add*1);
- 
-         }
-let brutto=Math.round(count()*100)/100;
+//wyliczenie kwoty brutto z godzin
+                const count =()=>{return (hours * rate+nadgodz*rate*0.5 + satsun *rate*0.5+hollydays *8*avaragemoney/avaragehours+illnessworkdays*avaragemoney/30*0.8 + illnessweekenddays*avaragemoney/30*0.8+add*1)};
+                let brutto=Math.round(count()*100)/100;
+
+//wyliczenie składek
 let ppk;
 let ppk_bru;
 if(this.state.isConfirmedPpk)
@@ -130,25 +130,19 @@ if(this.state.isConfirmedPpk)
 ppk_bru=Math.round(brutto*1.015*100)/100;}
 if(brutto<0) {brutto=0};
 let zus;
-if(brutto<=14805)
-{zus=Math.round(brutto*0.1371*100)/100}else{zus=Math.round((2029.77+(brutto-14805)*0.0245)*100)/100};
+zus=Math.round(brutto*0.1371*100)/100;
 let kos_doch;
 if(brutto<250){kos_doch=brutto}else{kos_doch=250}
 const pod_zdr=brutto-zus;
 let zdr=Math.round(pod_zdr*0.09*100)/100;
+
+//wyliczenie podstawy do zaliczki
 let pod_zal=ppk_bru-zus-kos_doch-2500;
 
-if(ppk_bru>=5701&&ppk_bru<=8549){ 
-pod_zal=pod_zal-(brutto*0.0668-380.5)/0.17
-}else if(ppk_bru>8549&&ppk_bru<=11141){
-    pod_zal=pod_zal-(brutto*-0.0735+819.08)
-/0.17}
-
-
+//wyliczenie zaliczki na podatek dochodowy
 if(pod_zal<0) {pod_zal=0};
 let zal_pod;
-
-if(pod_zal<=10000&&ppk_bru>8549&&!this.state.isConfirmedPpk){zal_pod=Math.ceil(pod_zal*0.17+brutto*0.015*0.15)}else if(pod_zal>10000&&pod_zal<=83333.33){zal_pod=Math.ceil((pod_zal+2500-10000)*0.32+1275)} else if(pod_zal>83333.33){zal_pod=Math.ceil((pod_zal+2500-10000)*0.32+1275+(pod_zal-83333.33)*0.04)} else{zal_pod=Math.ceil(pod_zal*0.17)};
+zal_pod=Math.round(pod_zal*0.12);
 
 
 
@@ -171,7 +165,7 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
                   
                  
             <header><Wynik/></header><br/><br/><br/>
-                 <nav><div id="tytul"><h2>Kalkulator Wynagrodzenia</h2><p>Polskiego Ładu (Nowego Ładu)</p><h6>wersja kalkulatora z zasadami sprzed Polskiego Ładu jest dostępna <a href='https://barytone-winter.000webhostapp.com/'>tutaj</a></h6></div></nav>
+                 <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>Polskiego Ładu (Nowego Ładu)</p><h5>aktualny od 1 lipca 2022r.<br/>(uwzględnia zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</h5><br/><h5 id="info">* Kalkulator wylicza wynagrodzenie netto dla osoby która:<br/> - jest zatrudniona na umowę o pracę<br/> - wykonuje pracę w miejscu zamieszkania<br/> - ma powyżej 26 lat<br/> - ma złożone oświadczenie PIT-2 </h5></div></nav>
                  <section><ol>
 
    <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny}/></li>
