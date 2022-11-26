@@ -27,7 +27,7 @@ const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
         avaragehours:168,
         avaragemoney:3309.6,
         add:0,
-        //isConfirmed:false,
+        isConfirmed:false,
         isConfirmedPpk:false,
         temp :"brak danych",
         wiatr:"brak danych",
@@ -90,7 +90,7 @@ handleChangeSrWyp =(e)=>{if(e.target.value.length>0){this.setState ({avaragemone
 
 handleChangeAdd=(e)=>{this.setState({add:e.target.value})}
 
-//handleChangeConfirm =()=>{this.setState({isConfirmed :!this.state.isConfirmed})}
+handleChangeConfirm =()=>{this.setState({isConfirmed :!this.state.isConfirmed})}
 
 handleChangeConfirmPpk=()=>{this.setState({isConfirmedPpk :!this.state.isConfirmedPpk})}
 
@@ -142,13 +142,14 @@ let pod_zal=ppk_bru-zus-kos_doch-2500;
 //wyliczenie zaliczki na podatek dochodowy
 if(pod_zal<0) {pod_zal=0};
 let zal_pod;
-zal_pod=Math.round(pod_zal*0.12);
+if(this.state.isConfirmed)
+{zal_pod=Math.round(pod_zal*0.32)}
+else{zal_pod=Math.round(pod_zal*0.12)};
 
 
 
 const pod_ppk=Math.round((ppk_bru-brutto)*100)/100;
 let netto=Math.round((brutto-zus-zdr-zal_pod-ppk)*100)/100;
-
 netto=netto.toString();
 netto=netto.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 netto=netto.replace('.',' , ');
@@ -188,7 +189,7 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
  
    <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd}/></li>
   
-   {/*<label className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br/>*/}
+   <label className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br/>
        
    <label className="box"><input type='checkbox' id="ppk" onChange ={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk}/>zaznacz jeśli nie uczestniczysz w PPK</label>
    
