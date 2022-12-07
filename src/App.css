@@ -91,10 +91,13 @@ font-weight:400;
 font-size:0.8em;
 background-color:#37F7FD;
 }
-#box, #ppk, .box{
-width:2em;
-height:2em;
-margin-right:1em;
+.box{
+  text-align: left;
+}
+#box, #ppk{
+  margin-right: 1em;
+  height: 2em;
+  width: 2em;
 }
 span{
 font-weight:bold;
@@ -107,9 +110,6 @@ height:5.5em;
 margin-top:-1em;
 }
 .list{
-margin:auto;
-left:0;
-right:0;
 text-align:left;
 padding:20px;
 background-color:white;
