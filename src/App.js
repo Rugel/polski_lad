@@ -165,8 +165,11 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
                  return <div>
                   
                  
-            <header><Wynik/></header><br/><br/><br/>
-                 <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>Polskiego Ładu (Nowego Ładu)</p><h5>aktualny od 1 lipca 2022r.<br/>(uwzględnia zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</h5><br/><h5 id="info">* Kalkulator wylicza wynagrodzenie netto dla osoby która:<br/> - jest zatrudniona na umowę o pracę<br/> - wykonuje pracę w miejscu zamieszkania<br/> - ma powyżej 26 lat<br/> - ma złożone oświadczenie PIT-2 </h5></div></nav>
+            <header><Wynik/></header>
+              <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>Polskiego Ładu (Nowego Ładu)</p><h5>aktualny od 1 lipca 2022r.<br/>(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</h5><br/><h5 id="info">* Kalkulator wylicza wynagrodzenie netto dla osoby która:<br/> - jest zatrudniona na umowę o pracę<br/> - wykonuje pracę w miejscu zamieszkania<br/> - ma powyżej 26 lat<br/> - ma złożone oświadczenie PIT-2 </h5>
+              <div className='facebook'><div  className="fb-share-button" data-href="https://overactive-applicat.000webhostapp.com/" data-layout="button" data-size="small" ><a rel="noreferrer" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Foveractive-applicat.000webhostapp.com%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Udostępnij
+              </a></div></div></div>
+              </nav>
                  <section><ol>
 
    <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny}/></li>
@@ -192,10 +195,6 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
    <div className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</div><br/>
        
    <div className="box"><input type='checkbox' id="ppk" onChange ={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk}/>zaznacz jeśli nie uczestniczysz w PPK</div><br/>
-   
-   <div className='facebook'><div  className="fb-share-button" data-href="https://overactive-applicat.000webhostapp.com/" data-layout="button" data-size="small" ><a rel="noreferrer" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Foveractive-applicat.000webhostapp.com%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Udostępnij
-</a></div></div>
-
    </ol>
 
   <div id='constInp'><Input content='Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto' method={this.handleChangeAdd}/></div>

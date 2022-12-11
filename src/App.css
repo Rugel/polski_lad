@@ -30,7 +30,7 @@
   font-weight:900;
   font-size:1.1em;
   background-color: #58fffd;
-  padding:3em 1em 1.5em 1em;
+  padding:8em 1em .5em 1em;
 
 }
 
@@ -47,10 +47,11 @@
   transition:.5s;
   border-radius: .35em;
 }
+.input:focus{
+  box-shadow: 0px 0px 15px black;
+}
 .input:hover{
-  font-size:1.4em;
   cursor:pointer;
-  box-shadow: 5px 5px 10px black;
 }
 .wynik{
   margin:auto;
@@ -119,7 +120,7 @@ span{
 }
 
 .facebook{
-  padding: 2em;
+  text-align: end;
 }
 
 #constInp{
@@ -138,10 +139,11 @@ img{
 }
 li, .box{
   padding-top: 1em;
-  padding-right: 3em;
+  padding-right: .5em;
   padding-left: .5em;
   border: 1px solid black;
-  margin:.5em;
+  margin:1em;
   background-color: #e9fcec;
   border-radius: .5em;
+  flex-grow: 1;
 }
