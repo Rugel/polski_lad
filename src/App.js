@@ -192,9 +192,9 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
  
    <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd}/></li>
   
-   <div className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</div><br/>
+   <div><div className="box"><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</div>
        
-   <div className="box"><input type='checkbox' id="ppk" onChange ={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk}/>zaznacz jeśli nie uczestniczysz w PPK</div><br/>
+   <div className="box"><input type='checkbox' id="ppk" onChange ={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk}/>zaznacz jeśli nie uczestniczysz w PPK</div></div>
    </ol>
 
   <div id='constInp'><Input content='Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto' method={this.handleChangeAdd}/></div>
