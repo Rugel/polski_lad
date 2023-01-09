@@ -25,7 +25,7 @@ const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
         illnessworkdays:0,
         illnessweekenddays:0,
         avaragehours:168,
-        avaragemoney:3309.6,
+        avaragemoney:3490,
         add:0,
         isConfirmed:false,
         isConfirmedPpk:false,
@@ -188,7 +188,7 @@ const Wynik = ()=> {return(<h3 className="wynik">Wynagrodzenie netto wynosi:<br/
  
    <li><Input content='Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrGodz} plhld='wstp.168'/></li>
  
-   <li><Input content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld='wstp.3309,6'/></li>
+   <li><Input content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld='wstp.3490'/></li>
  
    <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd}/></li>
   
