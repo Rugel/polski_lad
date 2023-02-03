@@ -1,148 +1,162 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
- body {
-  margin:auto;
-  left:0;
-  right:0;
-  font-family:'Atma', sans-serif;
-  text-align:center;
+
+body {
+  margin: auto;
+  left: 0;
+  right: 0;
+  font-family: 'Atma', sans-serif;
+  text-align: center;
 }
 
 .disclaimer,
-  img[alt*="000webhost"],
-  img[alt*="000webhost"][style],
-  img[src*="000webhost"],
-  img[src*="000webhost"][style],
-  body > div:nth-last-of-type(1)[style]{
-    opacity: 0 !important;
-    pointer-events:none !important;
-    width: 0px !important;
-    height: 0px !important;
-    visibility:hidden !important;
-    display:none !important;
+img[alt*="000webhost"],
+img[alt*="000webhost"][style],
+img[src*="000webhost"],
+img[src*="000webhost"][style],
+body>div:nth-last-of-type(1)[style] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0px !important;
+  height: 0px !important;
+  visibility: hidden !important;
+  display: none !important;
 }
 
-#tytul{
-  text-align:center;
-  font-weight:900;
-  font-size:1.1em;
+#tytul {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.1em;
   background-color: #58fffd;
-  padding:8em 1em .5em 1em;
+  padding: 8em 1em .5em 1em;
 
 }
 
-.input{
+.input {
   font-family: 'Atma', sans-serif;
-  text-align:center;
-  width:8em;
-  height:1.8em;
-  color:#0077FF;
-  font-weight:bolder;
-  font-size:1.2em;
-  outline:none;
-  letter-spacing:3px;
-  transition:.5s;
+  text-align: center;
+  width: 8em;
+  height: 1.8em;
+  color: #0077FF;
+  font-weight: bolder;
+  font-size: 1.2em;
+  outline: none;
+  letter-spacing: 3px;
+  transition: .5s;
   border-radius: .35em;
 }
-.input:focus{
+
+.input:focus {
   box-shadow: 0px 0px 15px black;
 }
-.input:hover{
-  cursor:pointer;
+
+.input:hover {
+  cursor: pointer;
 }
-.wynik{
-  margin:auto;
-  left:0;
-  right:0;
-  margin-top:0;
-  position:fixed;
-  font-size:1.3em;
-  background-color:#94FD37;
-  padding:10px;
-  -shadow:0px 0px 15px;
-  text-shadow:3px 3px 5px grey;
-  border-bottom:double 8px #FD5B35;
-  border-top:double 8px #FD3C37;
-  background-image: linear-gradient(to right,#222, #54AD00, #94FD37, #90FF50,   #AAFFAA, #90FF50, #94FD37, #54AD00, #222);
+
+.wynik {
+  margin: auto;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+  position: fixed;
+  font-size: 1.3em;
+  background-color: #94FD37;
+  padding: 10px;
+  -shadow: 0px 0px 15px;
+  text-shadow: 3px 3px 5px grey;
+  border-bottom: double 8px #FD5B35;
+  border-top: double 8px #FD3C37;
+  background-image: linear-gradient(to right, #222, #54AD00, #94FD37, #90FF50, #AAFFAA, #90FF50, #94FD37, #54AD00, #222);
   z-index: 99;
 }
 
 
-ol{
+ol {
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 20px;
   align-content: space-between;
   justify-content: space-evenly;
   padding: 2em;
-  font-weight:300;
-} 
+  font-weight: 300;
+}
 
-footer{
-  padding-top:2em;
-  font-weight:400;
-  font-size:0.8em;
+footer {
+  padding-top: 2em;
+  font-weight: 400;
+  font-size: 0.8em;
   background-color: #58fffd;
 }
-.box{
+
+.box {
   text-align: left;
 }
-#box, #ppk{
+
+#box,
+#ppk {
   margin-right: 1em;
   height: 2em;
   width: 2em;
   padding: 2em;
 }
-span{
-  font-weight:bold;
-  color:#FD5B35;
-  letter-spacing:1px;
-}
-.img{
-  width:5.5em;
-  height:5.5em;
-  margin-top:-1em;
-}
-.list{
-  padding: 2% 10%;
-  background-color:white;
-  text-align: left;
-}
-.count{
-  text-align:right;
-  padding-left:10px;
-  padding-right:5px;
-  letter-spacing:1px;
-  font-weight:bold;
+
+span {
+  font-weight: bold;
+  color: #FD5B35;
+  letter-spacing: 1px;
 }
 
-.facebook{
+.img {
+  width: 5.5em;
+  height: 5.5em;
+  margin-top: -1em;
+}
+
+.list {
+  padding: 2% 10%;
+  background-color: white;
+  text-align: left;
+}
+
+.count {
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 5px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.facebook {
   text-align: end;
 }
 
-#constInp{
-  padding:2em;
-  background-image:linear-gradient(to right,#444, #54AD00, #94FD37, #90FF50,  #90FF50, #94FD37, #54AD00, #444);
+#constInp {
+  padding: 2em;
+  background-image: linear-gradient(to right, #444, #54AD00, #94FD37, #90FF50, #90FF50, #94FD37, #54AD00, #444);
   font-weight: 600;
 }
-img{
+
+img {
   width: 2.5em;
   height: 2.5em;
 }
 
-#info{
+#info {
   text-align: left;
   padding-left: 10%;
 }
-li, .box{
+
+li,
+.box {
   padding-top: 1em;
   padding-right: .5em;
   padding-left: .5em;
   border: 1px solid black;
-  margin:1em;
+  margin: 1em;
   background-color: #e9fcec;
   border-radius: .5em;
   flex-grow: 1;
