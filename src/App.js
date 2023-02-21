@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './App.css';
 import Input from './modules/input';
 import Footer from './modules/footer';
@@ -8,9 +8,9 @@ import clouds from './icons/clouds.svg';
 import pressure from './icons/pressure.svg';
 import summer from './icons/summer.svg';
 import vision from './icons/vision.svg';
-import Nasa from './modules/nasa';
+//import Nasa from './modules/nasa';
 
-
+const Nasa = lazy(() => import('./modules/nasa'))
 
 const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
 
@@ -34,7 +34,7 @@ class App extends React.Component {
     cisnienie: "brak danych",
     clouds: "brak danych",
     visibility: "brak danych",
-    icon: "",
+    // icon: "",
     time: "brak danych",
     city: "Warszawa",
     cityOk: "Warszawa",
@@ -47,28 +47,31 @@ class App extends React.Component {
 
 
   componentDidMount() {
+
+
+
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=${API_KEY_OW}`)
       .then(response => response.json())
-      .then(dane => this.setState({ temp: dane.main.temp, wiatr: dane.wind.speed, stan: dane.weather[0].description, cisnienie: dane.main.pressure, visibility: dane.visibility, clouds: dane.clouds.all, icon: dane.weather[0].icon, time: new Date(dane.dt * 1000).toLocaleTimeString() })
+      .then(dane => this.setState({ temp: dane.main.temp, wiatr: dane.wind.speed, stan: dane.weather[0].description, cisnienie: dane.main.pressure, visibility: dane.visibility, clouds: dane.clouds.all, /*icon: dane.weather[0].icon,*/time: new Date(dane.dt * 1000).toLocaleTimeString() })
       )
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const apiWork = dane => this.setState({ cityOk: dane.name, temp: dane.main.temp, wiatr: dane.wind.speed, stan: dane.weather[0].description, cisnienie: dane.main.pressure, visibility: dane.visibility, clouds: dane.clouds.all, /*icon: dane.weather[0].icon, */time: new Date(dane.dt * 1000).toLocaleTimeString(), country: dane.sys.country });
+
     if (prevState.active !== this.state.active || prevState.lat !== this.state.lat) {
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&lang=pl&appid=${API_KEY_OW}`)
         .then(response => response.json())
-        .then(dane => this.setState({ cityOk: dane.name, temp: dane.main.temp, wiatr: dane.wind.speed, stan: dane.weather[0].description, cisnienie: dane.main.pressure, visibility: dane.visibility, clouds: dane.clouds.all, icon: dane.weather[0].icon, time: new Date(dane.dt * 1000).toLocaleTimeString(), country: dane.sys.country })
-        )
+        .then(apiWork)
     }
     else if (prevState.city !== this.state.city) {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=${API_KEY_OW}`)
         .then(response => response.json())
-        .then(dane => this.setState({
-          temp: dane.main.temp, wiatr: dane.wind.speed, stan: dane.weather[0].description, cisnienie: dane.main.pressure,
-          visibility: dane.visibility, clouds: dane.clouds.all, icon: dane.weather[0].icon, time: new Date(dane.dt * 1000).toLocaleTimeString(), cityOk: dane.name, country: dane.sys.country
-        }))
+        .then(apiWork)
     }
   }
+
+
 
   handleChangeGodziny = (e) => { this.setState({ hours: e.target.value }) }
 
@@ -145,16 +148,15 @@ class App extends React.Component {
     let netto = Math.round((brutto - zus - zdr - zal_pod - ppk) * 100) / 100;
     netto = netto.toString();
     netto = netto.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    netto = netto.replace('.', ' , ');
+    netto = netto.replace('.', ',');
     const Netto = () => netto;
 
-    const Wynik = () => { return (<h3 className="wynik">Wynagrodzenie netto wynosi:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '3px' }}><Netto /></span> PLN</h3>) }
+    const Wynik = () => { return (<p className="wynik">Wynagrodzenie netto wynosi:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '2px' }}><Netto /></span> PLN</p>) }
 
     return <div>
       <header><Wynik /></header>
-      <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>Polskiego Ładu (Nowego Ładu)</p><h5>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</h5><br /><h5 id="info">* Kalkulator wylicza wynagrodzenie netto dla osoby która:<br /> - jest zatrudniona na umowę o pracę<br /> - wykonuje pracę w miejscu zamieszkania<br /> - ma powyżej 26 lat<br /> - ma złożone oświadczenie PIT-2 </h5>
-        <div className='facebook'><div className="fb-share-button" data-href="https://overactive-applicat.000webhostapp.com/" data-layout="button" data-size="small" ><a rel="noreferrer" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Foveractive-applicat.000webhostapp.com%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Udostępnij
-        </a></div></div></div>
+      <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</p><br /><p className='small'><i>* Kalkulator wylicza wynagrodzenie netto dla osoby która:<br /> - jest zatrudniona na umowę o pracę<br /> - wykonuje pracę w miejscu zamieszkania<br /> - ma powyżej 26 lat<br /> - ma złożone oświadczenie PIT-2 </i></p><br/>
+        </div>
       </nav>
       <section><ol>
 
@@ -185,11 +187,9 @@ class App extends React.Component {
 
         <div id='constInp'><Input content='Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto' method={this.handleChangeAdd} /></div>
 
-        <article><div className="list"><h3>Dane szczegółowe:</h3><br /><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br /><h6>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</h6></div></article></section>
+        <article><div className="list"><h3>Dane szczegółowe:</h3><br /><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br /><p className="small"><i>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</i></p></div></article></section>
 
-      <footer><div><label><span style={{ fontSize: "18px" }}>Pogoda w Twoim mieście: </span><br /><input className="input" type="text" placeholder={this.state.cityOk} style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "50%", outline: "none" }}>🛰️</button>
-        <br />Aktualna pogoda dla miasta <span style={{ color: "#0000FF" }}>{this.state.cityOk} - {this.state.country}</span> (<span style={{ color: "black", fontWeight: "100" }}>{this.state.time}</span>):<br /> <img src={temp} alt="" /> temp.: <span>{this.state.temp} &#176;C</span><img src={wind} alt="" />wiatr: <span>{this.state.wiatr} m/s</span><br /> <img src={summer} alt="" /> stan: <span>{this.state.stan}</span> <img src={pressure} alt="" />  ciśnienie: <span>{this.state.cisnienie} hPa</span><br /> <img src={vision} alt="" /> widoczność: <span>{this.state.visibility} m</span> <img src={clouds} alt="" /> zachmurzenie:  <span>{this.state.clouds} %</span><br /><img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" /></div>
-        <br /><Nasa /><Footer /></footer>
+      <footer><div><label><span style={{ fontSize: "18px" }}>Pogoda w Twoim mieście: </span><br /><input className="input" type="text" placeholder={this.state.cityOk} style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "15%", outline: "none"}}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span style={{ color: "#0000FF" }}>{this.state.cityOk} - {this.state.country}</span> (<span style={{ color: "black", fontWeight: "300" }}>{this.state.time}</span>):<br /> <img className='icon' src={temp} alt="temperature" /> temp.: <span>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" />wiatr: <span>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br /><Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense><Footer/></footer>
     </div>
   }
 }

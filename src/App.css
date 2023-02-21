@@ -8,7 +8,7 @@ body {
   margin: auto;
   left: 0;
   right: 0;
-  font-family: 'Atma', sans-serif;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
 }
 
@@ -18,35 +18,34 @@ img[alt*="000webhost"][style],
 img[src*="000webhost"],
 img[src*="000webhost"][style],
 body>div:nth-last-of-type(1)[style] {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  width: 0px !important;
-  height: 0px !important;
-  visibility: hidden !important;
-  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+  width: 0px;
+  height: 0px;
+  visibility: hidden;
+  display: none;
 }
 
 #tytul {
   text-align: center;
   font-weight: 900;
-  font-size: 1.1em;
   background-color: #58fffd;
   padding: 8em 1em .5em 1em;
 
 }
 
 .input {
-  font-family: 'Atma', sans-serif;
   text-align: center;
   width: 8em;
   height: 1.8em;
   color: #0077FF;
-  font-weight: bolder;
+  font-weight: bold;
   font-size: 1.2em;
   outline: none;
   letter-spacing: 3px;
   transition: .5s;
   border-radius: .35em;
+  margin-top: .5em;
 }
 
 .input:focus {
@@ -88,7 +87,7 @@ ol {
 footer {
   padding-top: 2em;
   font-weight: 400;
-  font-size: 0.8em;
+  font-size: 0.7em;
   background-color: #58fffd;
 }
 
@@ -140,24 +139,30 @@ span {
   font-weight: 600;
 }
 
-img {
-  width: 2.5em;
-  height: 2.5em;
-}
-
-#info {
-  text-align: left;
-  padding-left: 10%;
+.icon{
+  width: 1em;
+  height: 1em;
+  margin-left: 2em;
+  margin-right: 0;
 }
 
 li,
 .box {
-  padding-top: 1em;
-  padding-right: .5em;
-  padding-left: .5em;
+  padding: 1em;
   border: 1px solid black;
   margin: 1em;
   background-color: #e9fcec;
   border-radius: .5em;
   flex-grow: 1;
+}
+
+.small{
+  font-size: 12px;
+  text-align: left;
+}
+
+table, th, td{
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: .5em;
 }

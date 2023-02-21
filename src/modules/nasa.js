@@ -15,7 +15,7 @@ class Nasa extends React.Component {
     componentDidMount() {
         fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY_NASA}`)
             .then(response => response.json())
-            .then(dane => this.setState({ nasa: dane.hdurl, title: dane.title, media_type: dane.media_type, nasa_vid: dane.url }));
+            .then(dane => this.setState({ nasa: dane.url, title: dane.title, media_type: dane.media_type, nasa_vid: dane.url }));
     }
     render() {
         const Frame = () => {
