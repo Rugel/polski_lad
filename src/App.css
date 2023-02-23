@@ -28,7 +28,6 @@ body>div:nth-last-of-type(1)[style] {
 
 #tytul {
   text-align: center;
-  font-weight: 900;
   background-color: #58fffd;
   padding: 8em 1em .5em 1em;
 
@@ -65,8 +64,9 @@ body>div:nth-last-of-type(1)[style] {
   font-size: 1.3em;
   background-color: #94FD37;
   padding: 10px;
-  -shadow: 0px 0px 15px;
+  box-shadow: 0px 0px 15px;
   text-shadow: 3px 3px 5px grey;
+  font-weight: 700;
   border-bottom: double 8px #FD5B35;
   border-top: double 8px #FD3C37;
   background-image: linear-gradient(to right, #222, #54AD00, #94FD37, #90FF50, #AAFFAA, #90FF50, #94FD37, #54AD00, #222);
@@ -87,8 +87,9 @@ ol {
 footer {
   padding-top: 2em;
   font-weight: 400;
-  font-size: 0.7em;
-  background-color: #58fffd;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  background-color: rgba(88, 255, 253, 1);
 }
 
 .box {
@@ -129,10 +130,6 @@ span {
   font-weight: bold;
 }
 
-.facebook {
-  text-align: end;
-}
-
 #constInp {
   padding: 2em;
   background-image: linear-gradient(to right, #444, #54AD00, #94FD37, #90FF50, #90FF50, #94FD37, #54AD00, #444);
@@ -142,8 +139,11 @@ span {
 .icon{
   width: 1em;
   height: 1em;
-  margin-left: 2em;
-  margin-right: 0;
+  margin-bottom: -3px;
+}
+
+.icon[alt='wind'],[alt='pressure'],[alt='clouds']{
+  margin-left: 1em;
 }
 
 li,
@@ -151,7 +151,7 @@ li,
   padding: 1em;
   border: 1px solid black;
   margin: 1em;
-  background-color: #e9fcec;
+  background-color: rgba(88, 255, 253, .1);
   border-radius: .5em;
   flex-grow: 1;
 }

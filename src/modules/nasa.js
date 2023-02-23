@@ -25,7 +25,7 @@ class Nasa extends React.Component {
                 </iframe>)
             } else { return (<img src={this.state.nasa} alt="FOTKA" style={{ width: "95%", height: "95%" }} />) }
         }
-        return <><div style={{ textAlign: "right", marginRight: "2%" }}><em>Wrzutka Dnia od </em><img className="img" style={{ marginBottom: "-0.75em", width: "3.5em", height: "3.5em" }} src={nasa_logo} alt="NASA" /></div><label><Frame /><div style={{ color: "#00F", fontSize: "1.3em", textAlign: "left", marginLeft: "2.5%" }}><em>{this.state.title}</em></div></label><br /></>
+        return <><div style={{ textAlign: "right", marginRight: "2%" }}><em>Wrzutka Dnia od </em><img className="img" style={{ marginBottom: "-0.5em", width: "3.5em", height: "3.5em" }} src={nasa_logo} alt="NASA" /></div><label><Frame /><div style={{ color: "#00F", fontSize: "1em", textAlign: "left", marginLeft: "2.5%", marginTop: "-.5em" }}><em>{this.state.title}</em></div></label><br /></>
     }
 }
 
