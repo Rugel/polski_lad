@@ -102,6 +102,7 @@ class App extends React.Component {
   handleClickLocal = (e) => {
     let showPosition = function (position) {
       this.setState({ lat: position.coords.latitude, lon: position.coords.longitude, active: true });
+      document.getElementById('town').value = null;
     }
     showPosition = showPosition.bind(this);
     if (navigator.geolocation) {
@@ -155,9 +156,15 @@ class App extends React.Component {
 
     return <div>
       <header><Wynik /></header>
-      <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</p><br /><p className='small'><i><b>Kalkulator wylicza wynagrodzenie netto dla osoby która:</b><br /> - jest zatrudniona na umowę o pracę<br /> - wykonuje pracę w miejscu zamieszkania<br /> - ma powyżej 26 lat<br /> - ma złożone oświadczenie PIT-2 </i></p><br/>
-        </div>
+      <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</p><br /><p className='small'><i><b>Kalkulator wylicza wynagrodzenie netto dla osoby która:</b><br /> - jest zatrudniona na umowę o pracę<br /> - wykonuje pracę w miejscu zamieszkania<br /> - ma powyżej 26 lat<br /> - ma złożone oświadczenie PIT-2 </i></p><br />
+      </div>
       </nav>
+      <section className = 'desc'><div>
+      <p>Witaj! Chcesz wiedzieć, ile faktycznie zarobisz "na rękę" za swoją pracę?</p><p>Oto Kalkulator Wynagrodzenia, który dokładnie to obliczy. Wystarczy, że podasz kilka prostych informacji takich jak: stawka godzinowa, liczba przepracowanych godzin w miesiącu, ilość wykorzystanych dni urlopu czy ilość dni przebytych na zwolnieniu lekarskim, a Kalkulator Wynagrodzenia dokona precyzyjnych obliczeń - wynik otrzymasz natychmiast.</p>
+<p>Kalkulator Wynagrodzenia to prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją ciężką pracę.</p>
+<p>Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.</p>
+<p>Skorzystaj teraz z Kalkulatora Wynagrodzenia i miej pewność, że Twoje zarobki są na odpowiednim poziomie.</p>
+        </div></section>
       <section><ol>
 
         <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny} /></li>
@@ -189,7 +196,7 @@ class App extends React.Component {
 
         <article><div className="list"><p><b>Dane szczegółowe:</b></p><br /><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br /><p className="small"><i>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</i></p></div></article></section>
 
-      <footer><div><label><span style={{ fontSize: "18px" }}>Pogoda w Twoim mieście: </span><br /><input className="input" type="text" placeholder={this.state.cityOk} style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "15%", outline: "none"}}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span style={{ color: "#0000FF" }}>{this.state.cityOk} - {this.state.country}</span> (<span style={{ color: "black", fontWeight: "300" }}>{this.state.time}</span>):<br/><img className='icon' src={temp} alt="temperature" /> temp.: <span>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br /><Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense><Footer/></footer>
+      <footer><div><label><span style={{ fontSize: "18px" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "15%", outline: "none" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span style={{ color: "#0000FF" }}>{this.state.cityOk} - {this.state.country}</span> (<span style={{ color: "black", fontWeight: "300" }}>{this.state.time}</span>):<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br /><Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense><Footer /></footer>
     </div>
   }
 }

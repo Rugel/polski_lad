@@ -33,6 +33,16 @@ body>div:nth-last-of-type(1)[style] {
 
 }
 
+h1{
+  background-color: #000;
+  font-size: 32px;
+  color:transparent;
+  text-shadow: 0px 2px 3px rgba(255,255,255,.8);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+}
+
 .input {
   text-align: center;
   width: 8em;
@@ -165,4 +175,17 @@ table, th, td{
   border: 1px solid;
   border-collapse: collapse;
   padding: .5em;
+}
+
+.desc{
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: left;
+  font-weight: bold;
+  padding: 30px;
+  max-width: 800px;
+}
+p{
+  padding: .7em;
 }
