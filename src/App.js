@@ -155,16 +155,39 @@ class App extends React.Component {
     const Wynik = () => { return (<p className="wynik">Wynagrodzenie netto wynosi:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '2px' }}><Netto /></span> PLN</p>) }
 
     return <div>
-      <header><Wynik /></header>
-      <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</p><br /><p className='small'><i><b>Kalkulator wylicza wynagrodzenie netto dla osoby która:</b><br /> - jest zatrudniona na umowę o pracę<br /> - wykonuje pracę w miejscu zamieszkania<br /> - ma powyżej 26 lat<br /> - ma złożone oświadczenie PIT-2 </i></p><br />
+      <header><Wynik />
+      <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</p><br />
       </div>
       </nav>
+      </header>
       <section className = 'desc'><div>
-      <p>Witaj! Chcesz wiedzieć, ile faktycznie zarobisz "na rękę" za swoją pracę?</p><p>Oto Kalkulator Wynagrodzenia, który dokładnie to obliczy. Wystarczy, że podasz kilka prostych informacji takich jak: stawka godzinowa, liczba przepracowanych godzin w miesiącu, ilość wykorzystanych dni urlopu czy ilość dni przebytych na zwolnieniu lekarskim, a Kalkulator Wynagrodzenia dokona precyzyjnych obliczeń - wynik otrzymasz natychmiast.</p>
-<p>Kalkulator Wynagrodzenia to prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją ciężką pracę.</p>
-<p>Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.</p>
-<p>Skorzystaj teraz z Kalkulatora Wynagrodzenia i miej pewność, że Twoje zarobki są na odpowiednim poziomie.</p>
-        </div></section>
+      <strong>Przedstawiony tutaj Kalkulator służy do wyliczenia kwoty wynagrodzenia netto, czyli „na rękę'' dla pracownika, który:<br/>
+ — jest zatrudniony na umowę o pracę,<br/>
+ — wykonuje pracę w miejscu zamieszkania,<br/>
+ — jego wiek jest powyżej 26 lat,<br/>
+ — ma złożone oświadczenie PIT-2.
+</strong><p>
+To, co odróżnia go od innych kalkulatorów to możliwość uwzględnienia m.in. takich informacji jak: stawka godzinowa, liczba przepracowanych godzin czy liczba dni spędzonych na urlopie.
+</p><p>
+Aby Kalkulator prawidłowo obliczył kwotę wynagrodzenia, musi otrzymać prawidłowe dane, które użytkownik wpisze do pól edycyjnych.
+</p><p>
+<u><i><b>Szczegóły poprawności wprowadzanych danych:</b></i></u><br/>
+— w poz.1 należy wpisać łączną liczbę przepracowanych godzin w danym miesiącu,<br/>
+— w poz.2 należy wpisać obecną stawkę godzinową brutto ustaloną dla obliczania wynagrodzenia,<br/>
+— w poz.3 podajemy liczbę dni roboczych w danym miesiącu — bez względu na to ile dni pracownik był w pracy (liczba dni minus liczba sobót minus liczba niedziel minus liczba świąt) — domyślnie ustawiona na 21,<br/>
+— w poz.4 wpisujemy sumę godzin przepracowanych w soboty, niedziele i święta (służy to obliczeniu dodatkowej kwoty wynikającej z płatności tzw. setek)<br/>
+— jeśli korzystaliśmy z urlopu wypoczynkowego, na żądanie czy okolicznościowego wpisujemy ilość dni w poz.5<br/>
+— poz.6 służy uwzględnieniu pobytu pracownika na tzw. zwolnieniu lekarskim — wpisujemy liczbę dni, ale tylko tych, które były robocze,<br/>
+— poz. 7 ma podobne przeznaczenie — chodzi o pobyt na „zwolnieniu” w dni wolne od pracy,<br/>
+— poz.8 i 9 służy do obliczenia średniego wynagrodzenia do celów naliczenia kwot za urlop lub „zwolnienie lekarskie” - jeśli nie korzystałeś z powyższych, możesz nic nie wpisywać <br/>
+— w poz.10 wpisujemy sumę kwot brutto ewentualnych dodatków typu premia, mieszkaniówka — jeśli takowych nie ma — pole pozostaje puste.
+</p><p>
+Dodatkowo należy zwrócić uwagę na właściwe zaznaczenie pól związanych z tematem przekroczenia drugiego progu dochodowego oraz opcją braku uczestnictwa w Pracowniczych Planach Kapitałowych (PPK).
+</p><p>
+Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.
+</p><p>
+Kalkulator Wynagrodzenia to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
+        </div></section><hr/>
       <section><ol>
 
         <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny} /></li>
