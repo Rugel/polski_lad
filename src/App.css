@@ -28,7 +28,7 @@ body>div:nth-last-of-type(1)[style] {
 
 #tytul {
   text-align: center;
-  background-color: #58fffd;
+  background-color:#99ff99;
   padding: 8em 1em .5em 1em;
 
 }
@@ -77,8 +77,6 @@ h1{
   box-shadow: 0px 0px 15px;
   text-shadow: 3px 3px 5px grey;
   font-weight: 700;
-  border-bottom: double 8px #FD5B35;
-  border-top: double 8px #FD3C37;
   background-image: linear-gradient(to right, #222, #54AD00, #94FD37, #90FF50, #AAFFAA, #90FF50, #94FD37, #54AD00, #222);
   z-index: 99;
 }
@@ -96,10 +94,12 @@ ol {
 
 footer {
   padding-top: 2em;
+  padding-bottom: 1em;
+  color: white;
   font-weight: 400;
   font-size: 0.8em;
   line-height: 1.7em;
-  background-color: rgba(88, 255, 253, 1);
+  background-color: #444;
 }
 
 .box {
@@ -116,7 +116,7 @@ footer {
 
 span {
   font-weight: bold;
-  color: #FD5B35;
+  color: #99ff99;
   letter-spacing: 1px;
 }
 
@@ -142,7 +142,7 @@ span {
 
 #constInp {
   padding: 2em;
-  background-image: linear-gradient(to right, #444, #54AD00, #94FD37, #90FF50, #90FF50, #94FD37, #54AD00, #444);
+  background-color: #99ff99;
   font-weight: 600;
 }
 
@@ -150,6 +150,7 @@ span {
   width: 1em;
   height: 1em;
   margin-bottom: -3px;
+  background-color: white;
 }
 
 .icon[alt='wind'],[alt='pressure'],[alt='clouds']{
@@ -159,9 +160,9 @@ span {
 li,
 .box {
   padding: 1em;
-  border: 1px solid black;
+  border: 1px solid lightgrey;
   margin: 1em;
-  background-color: rgba(88, 255, 253, .1);
+  background-color: #eeffee;
   border-radius: .5em;
   flex-grow: 1;
 }
@@ -182,7 +183,7 @@ table, th, td{
   right: 0;
   margin: auto;
   text-align: left;
-  padding: 30px;
+  padding: 20px;
   max-width: 800px;
   line-height: 1.5em;
 }

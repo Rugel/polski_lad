@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React/*, { lazy, Suspense }*/ from 'react';
 import './App.css';
 import Input from './modules/input';
 import Footer from './modules/footer';
@@ -10,7 +10,7 @@ import summer from './icons/summer.svg';
 import vision from './icons/vision.svg';
 //import Nasa from './modules/nasa';
 
-const Nasa = lazy(() => import('./modules/nasa'))
+//const Nasa = lazy(() => import('./modules/nasa'))
 
 const API_KEY_OW = process.env.REACT_APP_API_KEY_OW;
 
@@ -210,16 +210,16 @@ Kalkulator Wynagrodzenia to z założenia prosty i szybki sposób, abyś mógł 
 
         <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
 
-        <div><div className="box"><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</div>
+        <div><div className="box"><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label></div>
 
-          <div className="box"><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</div></div>
+          <div className="box"><label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label></div></div>
       </ol>
 
         <div id='constInp'><Input content='Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto' method={this.handleChangeAdd} /></div>
 
         <article><div className="list"><p><b>Dane szczegółowe:</b></p><br /><table><tbody><tr><td>wysokość wynagrodzenia brutto:</td><td className="count">{brutto}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie społeczne:</td><td className="count">{zus}</td><td>zł</td></tr><tr><td>składka na ubezpieczenie zdrowotne: </td><td className="count">{zdr}</td><td>zł</td></tr><tr><td>zaliczka na podatek dochodowy:</td><td className="count">{zal_pod}</td><td>zł</td></tr><tr><td>składka na PPK:</td><td className="count">{ppk}</td><td>zł</td></tr><tr><td>kwota wpłaty finansowana przez pracodowcę na konto PPK pracownika:</td><td className="count">{pod_ppk}</td><td>zł</td></tr></tbody></table><br /><p className="small"><i>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</i></p></div></article></section>
 
-      <footer><div><label><span style={{ fontSize: "18px" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "15%", outline: "none" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span style={{ color: "#0000FF" }}>{this.state.cityOk} - {this.state.country}</span> (<span style={{ color: "black", fontWeight: "300" }}>{this.state.time}</span>):<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br /><Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense><Footer /></footer>
+      <footer><div><label><span style={{ fontSize: "18px" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "15%", outline: "none" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span>{this.state.cityOk} - {this.state.country}</span> <span style={{fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
     </div>
   }
 }

@@ -40,6 +40,6 @@ switch (miesiac) {
       break;
 }
 
-const Footer = () => <div>{day} {miesiac} {year} - &copy; Grzegorz Dychała</div>;
+const Footer = () => <div><strong><u>{day} {miesiac} {year} - &copy; Grzegorz Dychała</u></strong></div>;
 
 export default Footer;

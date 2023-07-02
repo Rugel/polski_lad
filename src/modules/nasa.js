@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import nasa_logo from '../icons/nasa_logo.svg';
 
 
@@ -29,4 +29,4 @@ class Nasa extends React.Component {
     }
 }
 
-export default Nasa;
+export default Nasa;*/
