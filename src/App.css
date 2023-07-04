@@ -96,7 +96,6 @@ footer {
   padding-top: 2em;
   padding-bottom: 1em;
   color: white;
-  font-weight: 400;
   font-size: 0.8em;
   line-height: 1.7em;
   background-color: #444;
@@ -111,10 +110,9 @@ footer {
   margin-right: 1em;
   height: 2em;
   width: 2em;
-  padding: 2em;
 }
 
-span {
+.span {
   font-weight: bold;
   color: #99ff99;
   letter-spacing: 1px;
@@ -147,18 +145,18 @@ span {
 }
 
 .icon{
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   margin-bottom: -3px;
   background-color: white;
+  padding: 2px;
 }
 
 .icon[alt='wind'],[alt='pressure'],[alt='clouds']{
   margin-left: 1em;
 }
 
-li,
-.box {
+li {
   padding: 1em;
   border: 1px solid lightgrey;
   margin: 1em;
@@ -189,4 +187,8 @@ table, th, td{
 }
 p{
   padding: .5em;
+}
+::placeholder{
+  color: black;
+  opacity: 1;
 }
