@@ -156,42 +156,11 @@ class App extends React.Component {
 
     return <div>
       <header><Wynik />
-        <nav><div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>aktualny od 1 lipca 2022r.<br />(uwzględnia    zmiany przyjęte przez Rząd 22 kwietnia 2022r.)</p><br />
+        <nav><div id="tytul"><h1>Kalkulator Wynagrodzeń</h1><br/><h5><em>dla pracowników ze stawką godzinową<br />(uwzględnia urlop, pracę w dni wolne i świąteczne, pobyt na zwolnieniu lekarskim, dodatki, PPK, drugi próg podatkowy)</em></h5><br />
         </div>
         </nav>
       </header>
-      <section className='desc'><div>
-        <strong>Przedstawiony tutaj Kalkulator służy do wyliczenia kwoty wynagrodzenia netto, czyli „na rękę'' dla pracownika, który:<br />
-          — jest zatrudniony na umowę o pracę,<br />
-          — wykonuje pracę w miejscu zamieszkania,<br />
-          — jego wiek jest powyżej 26 lat,<br />
-          — ma złożone oświadczenie PIT-2.
-        </strong><p>
-          To, co odróżnia go od innych kalkulatorów to możliwość uwzględnienia m.in. takich informacji jak: stawka godzinowa, liczba przepracowanych godzin czy liczba dni spędzonych na urlopie.
-        </p><p>
-          Aby Kalkulator prawidłowo obliczył kwotę wynagrodzenia, musi otrzymać prawidłowe dane, które użytkownik wpisze do pól edycyjnych.
-        </p><p>
-          <u><i><b>Szczegóły poprawności wprowadzanych danych:</b></i></u><br />
-          — w poz.1 należy wpisać łączną liczbę przepracowanych godzin w danym miesiącu,<br />
-          — w poz.2 należy wpisać obecną stawkę godzinową brutto ustaloną dla obliczania wynagrodzenia,<br />
-          — w poz.3 podajemy liczbę dni roboczych w danym miesiącu — bez względu na to ile dni pracownik był w pracy (liczba dni minus liczba sobót minus liczba niedziel minus liczba świąt) — domyślnie ustawiona na 21,<br />
-          — w poz.4 wpisujemy sumę godzin przepracowanych w soboty, niedziele i święta (służy to obliczeniu dodatkowej kwoty wynikającej z płatności tzw. setek)<br />
-          — jeśli korzystaliśmy z urlopu wypoczynkowego, na żądanie czy okolicznościowego wpisujemy ilość dni w poz.5<br />
-          — poz.6 służy uwzględnieniu pobytu pracownika na tzw. zwolnieniu lekarskim — wpisujemy liczbę dni, ale tylko tych, które były robocze,<br />
-          — poz. 7 ma podobne przeznaczenie — chodzi o pobyt na „zwolnieniu” w dni wolne od pracy,<br />
-          — poz.8 i 9 służy do obliczenia średniego wynagrodzenia do celów naliczenia kwot za urlop lub „zwolnienie lekarskie” - jeśli nie korzystałeś z powyższych, możesz nic nie wpisywać <br />
-          — w poz.10 wpisujemy sumę kwot brutto ewentualnych dodatków typu premia, mieszkaniówka — jeśli takowych nie ma — pole pozostaje puste.
-        </p><p>
-          Dodatkowo należy zwrócić uwagę na właściwe zaznaczenie w poz.11 pól związanych z tematem przekroczenia drugiego progu dochodowego oraz opcją braku uczestnictwa w Pracowniczych Planach Kapitałowych. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
-        </p><p>
-          PIT-2 to oświadczenie pracownika dla celów obliczania miesięcznych zaliczek na podatek dochodowy od osób fizycznych. Mówiąc prościej: taki wniosek składamy pracodawcy, by ten mógł odprowadzić z naszej pensji podatek z uwzględnieniem kwoty wolnej.
-          PIT-2 składa się raz, niezwłocznie po podjęciu pracy u danego pracodawcy, tj. przed pierwszą wypłatą wynagrodzenia. Nie ma jednak przeszkód, aby pracodawca przyjął i stosował to oświadczenie w dowolnym momencie roku. Pracodawca uwzględni złożony przez pracownika PIT-2 najpóźniej od miesiąca następującego po tym, w którym złożył oświadczenie.
-        </p><p>
-          Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.
-        </p><p>
-          Kalkulator Wynagrodzenia to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
-      </div></section><hr />
-      <section><ol>
+      <section><ol id="list">
 
         <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny} /></li>
 
@@ -239,6 +208,38 @@ class App extends React.Component {
             </table>
             <br /><p className="small"><i>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</i></p>
           </div></article></section>
+          <hr />
+          <section className='desc'><div>
+        <strong>Przedstawiony tutaj Kalkulator służy do wyliczenia kwoty wynagrodzenia netto, czyli „na rękę'' dla pracownika, który:<br />
+          — jest zatrudniony na umowę o pracę,<br />
+          — wykonuje pracę w miejscu zamieszkania,<br />
+          — jego wiek jest powyżej 26 lat,<br />
+          — ma złożone oświadczenie PIT-2.
+        </strong><p>
+          To, co odróżnia go od innych kalkulatorów to możliwość uwzględnienia m.in. takich informacji jak: stawka godzinowa, liczba przepracowanych godzin czy liczba dni spędzonych na urlopie.
+        </p><p>
+          Aby Kalkulator prawidłowo obliczył kwotę wynagrodzenia, musi otrzymać prawidłowe dane, które użytkownik wpisze do pól edycyjnych.
+        </p><p>
+          <u><i><b>Szczegóły poprawności wprowadzanych danych:</b></i></u><br />
+          — w poz.1 należy wpisać łączną liczbę przepracowanych godzin w danym miesiącu,<br />
+          — w poz.2 należy wpisać obecną stawkę godzinową brutto ustaloną dla obliczania wynagrodzenia,<br />
+          — w poz.3 podajemy liczbę dni roboczych w danym miesiącu — bez względu na to ile dni pracownik był w pracy (liczba dni minus liczba sobót minus liczba niedziel minus liczba świąt) — domyślnie ustawiona na 21,<br />
+          — w poz.4 wpisujemy sumę godzin przepracowanych w soboty, niedziele i święta (służy to obliczeniu dodatkowej kwoty wynikającej z płatności tzw. setek)<br />
+          — jeśli korzystaliśmy z urlopu wypoczynkowego, na żądanie czy okolicznościowego wpisujemy ilość dni w poz.5<br />
+          — poz.6 służy uwzględnieniu pobytu pracownika na tzw. zwolnieniu lekarskim — wpisujemy liczbę dni, ale tylko tych, które były robocze,<br />
+          — poz. 7 ma podobne przeznaczenie — chodzi o pobyt na „zwolnieniu” w dni wolne od pracy,<br />
+          — poz.8 i 9 służy do obliczenia średniego wynagrodzenia do celów naliczenia kwot za urlop lub „zwolnienie lekarskie” - jeśli nie korzystałeś z powyższych, możesz nic nie wpisywać <br />
+          — w poz.10 wpisujemy sumę kwot brutto ewentualnych dodatków typu premia, mieszkaniówka — jeśli takowych nie ma — pole pozostaje puste.
+        </p><p>
+          Dodatkowo należy zwrócić uwagę na właściwe zaznaczenie w poz.11 pól związanych z tematem przekroczenia drugiego progu dochodowego oraz opcją braku uczestnictwa w Pracowniczych Planach Kapitałowych. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
+        </p><p>
+          PIT-2 to oświadczenie pracownika dla celów obliczania miesięcznych zaliczek na podatek dochodowy od osób fizycznych. Mówiąc prościej: taki wniosek składamy pracodawcy, by ten mógł odprowadzić z naszej pensji podatek z uwzględnieniem kwoty wolnej.
+          PIT-2 składa się raz, niezwłocznie po podjęciu pracy u danego pracodawcy, tj. przed pierwszą wypłatą wynagrodzenia. Nie ma jednak przeszkód, aby pracodawca przyjął i stosował to oświadczenie w dowolnym momencie roku. Pracodawca uwzględni złożony przez pracownika PIT-2 najpóźniej od miesiąca następującego po tym, w którym złożył oświadczenie.
+        </p><p>
+          Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.
+        </p><p>
+          Kalkulator Wynagrodzenia to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
+      </div></section>
 
       <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2em", height: "1.6em", fontSize: "1.7em", borderRadius: "15%", outline: "none" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
     </div>
