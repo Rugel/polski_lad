@@ -183,6 +183,6 @@ p{
   padding: .5em;
 }
 ::placeholder{
-  color: black;
-  opacity: 1;
+  color: #111;
+  opacity:1;
 }
