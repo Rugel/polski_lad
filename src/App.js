@@ -137,14 +137,14 @@ class App extends React.Component {
     let zdr = Math.round(pod_zdr * 0.09 * 100) / 100;
 
     //wyliczenie podstawy do zaliczki
-    let pod_zal = ppk_bru - zus - kos_doch - 2500;
+    let pod_zal = ppk_bru - zus - kos_doch;
 
     //wyliczenie zaliczki na podatek dochodowy
     if (pod_zal < 0) { pod_zal = 0 };
     let zal_pod;
-    if (this.state.isConfirmed) { zal_pod = Math.round(pod_zal * 0.32) }
-    else { zal_pod = Math.round(pod_zal * 0.12) };
-
+    if (this.state.isConfirmed) { zal_pod = Math.round(pod_zal * 0.32)-300 }
+    else { zal_pod = Math.round(pod_zal * 0.12)-300 };
+    if(zal_pod<0) {zal_pod=0};
     const pod_ppk = Math.round((ppk_bru - brutto) * 100) / 100;
     let netto = Math.round((brutto - zus - zdr - zal_pod - ppk) * 100) / 100;
     netto = netto.toString();
