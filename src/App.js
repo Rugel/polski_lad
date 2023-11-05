@@ -28,6 +28,7 @@ class App extends React.Component {
     add: 0,
     isConfirmed: false,
     isConfirmedPpk: false,
+    isConfirmedU26: false,
     temp: "brak danych",
     wiatr: "brak danych",
     stan: "brak danych",
@@ -97,6 +98,8 @@ class App extends React.Component {
 
   handleChangeConfirmPpk = () => { this.setState({ isConfirmedPpk: !this.state.isConfirmedPpk }) }
 
+  handleChangeConfirmU26 = () => { this.setState({ isConfirmedU26: !this.state.isConfirmedU26 }) }
+
   handleChangeCity = (e) => { if (e.target.value.length > 0) { this.setState({ city: e.target.value, active: false }) } else { this.setState({ city: "Warszawa", active: true }) } }
 
   handleClickLocal = (e) => {
@@ -142,9 +145,9 @@ class App extends React.Component {
     //wyliczenie zaliczki na podatek dochodowy
     if (pod_zal < 0) { pod_zal = 0 };
     let zal_pod;
-    if (this.state.isConfirmed) { zal_pod = Math.round(pod_zal * 0.32)-300 }
-    else { zal_pod = Math.round(pod_zal * 0.12)-300 };
-    if(zal_pod<0) {zal_pod=0};
+    if (this.state.isConfirmed) { zal_pod = Math.round(pod_zal * 0.32) - 300 }
+    else { zal_pod = Math.round(pod_zal * 0.12) - 300 };
+    if (zal_pod < 0 || (this.state.isConfirmedU26 && pod_zal < 7127.33)) { zal_pod = 0 };
     const pod_ppk = Math.round((ppk_bru - brutto) * 100) / 100;
     let netto = Math.round((brutto - zus - zdr - zal_pod - ppk) * 100) / 100;
     netto = netto.toString();
@@ -156,7 +159,7 @@ class App extends React.Component {
 
     return <div>
       <header><Wynik />
-        <nav><div id="tytul"><h1>Kalkulator Wynagrodzeń</h1><br/><p><em>dla pracowników rozliczanych za pomocą stawki godzinowej z uwzględnieniem urlopu, pracy w dni wolne i świąteczne, pobytu na zwolnieniu lekarskim, dodatków, uczestnictwa w PPK, drugiego progu podatkowego</em></p><br />
+        <nav><div id="tytul"><h1>Kalkulator Wynagrodzeń</h1><br /><strong>dla pracowników z uwzględnieniem stawki godzinowej, urlopu, pracy w dni wolne i świąteczne, pobytu na zwolnieniu lekarskim, dodatków, uczestnictwa w PPK, drugiego progu podatkowego, ulgi dla młodych</strong><br />
         </div>
         </nav>
       </header>
@@ -182,11 +185,13 @@ class App extends React.Component {
 
         <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
 
-        <li class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br /><br /><hr /><br />
-          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label></li>
+        <li class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br />
+          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label><br />
+          <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz jeśli twój wiek jest poniżej 26 lat</label>
+        </li>
       </ol>
 
-        <div id='constInp'><Input content='Jeśli wysokość Twojego wynagrodzenia jest ustalona jako STAŁA KWOTA BRUTTO i chcesz wyliczyć kwotę "na rękę" wyczyść wszystkie poprzednie pola edycyjne i wpisz kwotę brutto' method={this.handleChangeAdd} /></div>
+        <div id='constInp'><Input content='Przelicznik BRUTTO na NETTO' method={this.handleChangeAdd} /></div>
 
         <article>
           <div className="list"><p><b>Dane szczegółowe:</b></p><br />
@@ -208,13 +213,9 @@ class App extends React.Component {
             </table>
             <br /><p className="small"><i>* prezentowane kwoty składek na ubezpieczenie społeczne i zdrowotne wynikają jedynie z potrąceń wynagrodzenia brutto pracownika - pracodawca dodatkowo finansuje  składki pracownika zgodnie z obowiązującymi przepisami</i></p>
           </div></article></section>
-          <hr />
-          <section className='desc'><div>
-        <strong>Przedstawiony tutaj Kalkulator służy do wyliczenia kwoty wynagrodzenia netto, czyli „na rękę'' dla pracownika, który:<br />
-          — jest zatrudniony na umowę o pracę,<br />
-          — wykonuje pracę w miejscu zamieszkania,<br />
-          — jego wiek jest powyżej 26 lat,<br />
-          — ma złożone oświadczenie PIT-2.
+      <hr />
+      <section className='desc'><div>
+        <strong>Przedstawiony tutaj Kalkulator służy do wyliczenia kwoty wynagrodzenia netto, czyli „na rękę'' dla pracownika, który jest zatrudniony w oparciu o umowę o pracę.
         </strong><p>
           To, co odróżnia go od innych kalkulatorów to możliwość uwzględnienia m.in. takich informacji jak: stawka godzinowa, liczba przepracowanych godzin czy liczba dni spędzonych na urlopie.
         </p><p>
@@ -232,19 +233,20 @@ class App extends React.Component {
           — w poz.10 wpisujemy sumę kwot brutto ewentualnych dodatków typu premia, mieszkaniówka — jeśli takowych nie ma — pole pozostaje puste.
         </p><p>
           Dodatkowo należy zwrócić uwagę na właściwe zaznaczenie w poz.11 pól związanych z tematem przekroczenia drugiego progu dochodowego oraz opcją braku uczestnictwa w Pracowniczych Planach Kapitałowych. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
-        </p><p>
-        Od 1 stycznia 2023 roku obowiązuje nowy wzór PIT-2. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:
-        <ul><li>możliwość dzielenia kwoty zmniejszającej podatek między maksymalnie 3 płatników - do tej pory kwota zmniejszająca podatek mogła być stosowana tylko przez jednego płatnika. Nowy PIT-2 pozwala na podzielenie kwoty zmniejszającej podatek między trzech płatników, w tym między pracodawcę, zleceniodawcę i ZUS</li>
-        <li>zawiera wszystkie wnioski i oświadczenia wpływające na ustalenie zaliczki na podatek dochodowy - do tej pory na formularzu PIT-2 składało się tylko oświadczenie o stosowaniu kwoty zmniejszającej podatek wynikającej z kwoty wolnej od podatku - nowy PIT-2 zawiera również oświadczenia o:<br/>- rozliczeniu podatku z małżonkiem lub jako samotny rodzic<br/>- opodatkowaniu dochodów z zagranicy<br/>- stosowaniu kosztów uzyskania przychodów z tytułu podróży służbowych</li>
-        </ul>
-        Nowy PIT-2 można złożyć w dowolnym momencie roku, jednak najlepiej zrobić to zaraz po podjęciu pracy.<br/><a href="https://www.gov.pl/attachment/7d32c2f6-e428-4824-80fc-bd2f6c07bb0f">PIT-2(9)</a> - link do pobrania formularza PIT-2
+        </p>
+        <p>Użycie <strong>Przelicznika BRUTTO na NETTO</strong> wymaga oczyszczenia poz.1-10 oraz zaznaczenia odpowiednich opcji w poz.11.</p>
+        <p>
+          Od 1 stycznia 2023 roku obowiązuje nowy wzór <strong>PIT-2</strong>. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:
+          <p>- możliwość dzielenia kwoty zmniejszającej podatek między maksymalnie 3 płatników - do tej pory kwota zmniejszająca podatek mogła być stosowana tylko przez jednego płatnika. Nowy PIT-2 pozwala na podzielenie kwoty zmniejszającej podatek między trzech płatników, w tym między pracodawcę, zleceniodawcę i ZUS</p>
+          <p>- zawiera wszystkie wnioski i oświadczenia wpływające na ustalenie zaliczki na podatek dochodowy - do tej pory na formularzu PIT-2 składało się tylko oświadczenie o stosowaniu kwoty zmniejszającej podatek wynikającej z kwoty wolnej od podatku.</p>
+          Nowy PIT-2 można złożyć w dowolnym momencie roku, jednak najlepiej zrobić to zaraz po podjęciu pracy.<br /><a href="https://www.gov.pl/attachment/7d32c2f6-e428-4824-80fc-bd2f6c07bb0f">PIT-2(9)</a> - link do pobrania formularza PIT-2
         </p><p>
           Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.
         </p><p>
           Kalkulator Wynagrodzeń to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
       </div></section>
 
-      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2.5em", height: "2.78em", borderRadius: "15%", outline: "none", marginLeft:"1em" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
+      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2.5em", height: "2.78em", borderRadius: "15%", outline: "none", marginLeft: "1em" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
     </div>
   }
 }
