@@ -147,7 +147,7 @@ class App extends React.Component {
     let zal_pod;
     if (this.state.isConfirmed) { zal_pod = Math.round(pod_zal * 0.32) - 300 }
     else { zal_pod = Math.round(pod_zal * 0.12) - 300 };
-    if (zal_pod < 0 || (this.state.isConfirmedU26 && pod_zal < 7127.33)) { zal_pod = 0 };
+    if (zal_pod < 0 || (this.state.isConfirmedU26 && brutto <= 85528 && !this.state.isConfirmed)) { zal_pod = 0 };
     const pod_ppk = Math.round((ppk_bru - brutto) * 100) / 100;
     let netto = Math.round((brutto - zus - zdr - zal_pod - ppk) * 100) / 100;
     netto = netto.toString();
@@ -184,17 +184,18 @@ class App extends React.Component {
         <li><Input content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld={this.state.avaragemoney} /></li>
 
         <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
-
-        <li class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br />
+        </ol>
+        <fieldset><legend><strong>dodatkowe opcje</strong></legend>
+          <div class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br />
           <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label><br />
           <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz jeśli twój wiek jest poniżej 26 lat</label>
-        </li>
-      </ol>
+        </div>
+        </fieldset>
 
-        <div id='constInp'><Input content='Przelicznik BRUTTO na NETTO' method={this.handleChangeAdd} /></div>
+        <div id='constInp'><Input content='przelicznik BRUTTO na NETTO' method={this.handleChangeAdd} /></div>
 
         <article>
-          <div className="list"><p><b>Dane szczegółowe:</b></p><br />
+          <div className="list"><p><b>dane szczegółowe:</b></p><br />
             <table>
               <thead>
                 <tr>
@@ -232,9 +233,9 @@ class App extends React.Component {
           — poz.8 i 9 służy do obliczenia średniego wynagrodzenia do celów naliczenia kwot za urlop lub „zwolnienie lekarskie” - jeśli nie korzystałeś z powyższych, możesz nic nie wpisywać <br />
           — w poz.10 wpisujemy sumę kwot brutto ewentualnych dodatków typu premia, mieszkaniówka — jeśli takowych nie ma — pole pozostaje puste.
         </p><p>
-          Dodatkowo należy zwrócić uwagę na właściwe zaznaczenie w poz.11 pól związanych z tematem przekroczenia drugiego progu dochodowego oraz opcją braku uczestnictwa w Pracowniczych Planach Kapitałowych. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
+          Pozatym należy zwrócić uwagę na właściwe zaznaczenie w "dodatkowych opcjach" pól związanych z tematem przekroczenia drugiego progu podatkowego, braku uczestnictwa w Pracowniczych Planach Kapitałowych oraz wieku podatnika. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
         </p>
-        <p>Użycie <strong>Przelicznika BRUTTO na NETTO</strong> wymaga oczyszczenia poz.1-10 oraz zaznaczenia odpowiednich opcji w poz.11.</p>
+        <p>Użycie <strong>Przelicznika BRUTTO na NETTO</strong> wymaga oczyszczenia poz.1-10 oraz zaznaczenia odpowiednich pozycji w "dodatkowych opcjach".</p>
         <p>
           Od 1 stycznia 2023 roku obowiązuje nowy wzór <strong>PIT-2</strong>. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:
           <p>- możliwość dzielenia kwoty zmniejszającej podatek między maksymalnie 3 płatników - do tej pory kwota zmniejszająca podatek mogła być stosowana tylko przez jednego płatnika. Nowy PIT-2 pozwala na podzielenie kwoty zmniejszającej podatek między trzech płatników, w tym między pracodawcę, zleceniodawcę i ZUS</p>
