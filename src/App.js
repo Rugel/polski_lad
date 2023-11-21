@@ -185,17 +185,17 @@ class App extends React.Component {
 
         <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
         </ol>
-        <fieldset><legend><strong>dodatkowe opcje</strong></legend>
-          <div class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br />
-          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label><br />
+        <fieldset><legend><strong>Dodatkowe opcje</strong></legend><br />
+          <div class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br /><br />
+          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label><br /><br />
           <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz jeśli twój wiek jest poniżej 26 lat</label>
         </div>
         </fieldset>
 
-        <div id='constInp'><Input content='przelicznik BRUTTO na NETTO' method={this.handleChangeAdd} /></div>
+        <div id='constInp'><Input content='Przelicznik BRUTTO na NETTO' method={this.handleChangeAdd} /></div>
 
         <article>
-          <div className="list"><p><b>dane szczegółowe:</b></p><br />
+          <div className="list"><p><b>Dane szczegółowe:</b></p><br />
             <table>
               <thead>
                 <tr>
@@ -222,7 +222,7 @@ class App extends React.Component {
         </p><p>
           Aby Kalkulator prawidłowo obliczył kwotę wynagrodzenia, musi otrzymać prawidłowe dane, które użytkownik wpisze do pól edycyjnych.
         </p><p>
-          <u><i><b>Szczegóły poprawności wprowadzanych danych:</b></i></u><br />
+          <u><i><b>Jak poprawnie wprowadzić dane?</b></i></u><br />
           — w poz.1 należy wpisać łączną liczbę przepracowanych godzin w danym miesiącu,<br />
           — w poz.2 należy wpisać obecną stawkę godzinową brutto ustaloną dla obliczania wynagrodzenia,<br />
           — w poz.3 podajemy liczbę dni roboczych w danym miesiącu — bez względu na to ile dni pracownik był w pracy (liczba dni minus liczba sobót minus liczba niedziel minus liczba świąt) — domyślnie ustawiona na 21,<br />
