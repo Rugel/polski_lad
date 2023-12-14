@@ -138,6 +138,9 @@ padding-bottom: 2em;
   padding: 2em;
   background-color: #99ff99;
   font-weight: 600;
+  max-width: 90%;
+  border-radius: .35em;
+  margin: auto;
 }
 
 .icon{
@@ -195,9 +198,11 @@ legend{
   border-radius: .5em;
 }
 fieldset{
-  max-width: 740px;
+  max-width: 90%;
+  width:max-content;
+  padding-left: 2em;
+  padding-right: 2em;
   border-radius: .5em;
-  margin: auto;
   margin-bottom: 1em;
-
+  margin: auto;
 }

@@ -8,6 +8,7 @@ import clouds from './icons/clouds.svg';
 import pressure from './icons/pressure.svg';
 import summer from './icons/summer.svg';
 import vision from './icons/vision.svg';
+import geo from './icons/geo-alt.svg';
 //import Nasa from './modules/nasa';
 
 //const Nasa = lazy(() => import('./modules/nasa'))
@@ -24,11 +25,12 @@ class App extends React.Component {
     illnessworkdays: 0,
     illnessweekenddays: 0,
     avaragehours: 168,
-    avaragemoney: 3600,
+    avaragemoney: 7005.76,
     add: 0,
     isConfirmed: false,
     isConfirmedPpk: false,
     isConfirmedU26: false,
+    isConfirmeWorkplace: false,
     temp: "brak danych",
     wiatr: "brak danych",
     stan: "brak danych",
@@ -74,23 +76,23 @@ class App extends React.Component {
 
 
 
-  handleChangeGodziny = (e) => { this.setState({ hours: e.target.value }) }
+  handleChangeGodziny = (e) => { if(e.target.value >= 0 && e.target.value <= 744){this.setState({ hours: e.target.value })} else {this.setState({hours: 168})} }
 
   handleChangeStawka = (e) => { this.setState({ rate: e.target.value }) }
 
-  handleChangeWorkdays = (e) => { if (e.target.value.length > 0) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } }
+  handleChangeWorkdays = (e) => { if (e.target.value > 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } }
 
-  handleChangeSatsun = (e) => { this.setState({ satsun: e.target.value }) }
+  handleChangeSatsun = (e) => { if(e.target.value > 0 && e.target.value <= 216){this.setState({ satsun: e.target.value })} else{this.setState({satsun: 0})} }
 
-  handleChangeUrlop = (e) => { this.setState({ hollydays: e.target.value }) }
+  handleChangeUrlop = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays ) {this.setState({ hollydays: e.target.value })} else{this.setState({hollydays: 0})} }
 
-  handleChangeCh1 = (e) => { this.setState({ illnessworkdays: e.target.value }) }
+  handleChangeCh1 = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays) {this.setState({ illnessworkdays: e.target.value })} else{this.setState({illnessworkdays: 0})} }
 
-  handleChangeCh2 = (e) => { this.setState({ illnessweekenddays: e.target.value }) }
+  handleChangeCh2 = (e) => { if(e.target.value > 0 && e.target.value <= 10) {this.setState({ illnessweekenddays: e.target.value })}else{this.setState({illnessweekenddays: 0})} }
 
-  handleChangeSrGodz = (e) => { if (e.target.value.length > 0) { this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 }) } }
+  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744){ this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 }) } }
 
-  handleChangeSrWyp = (e) => { if (e.target.value.length > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 3600 }) } }
+  handleChangeSrWyp = (e) => { if (e.target.value.length > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 }) } }
 
   handleChangeAdd = (e) => { this.setState({ add: e.target.value }) }
 
@@ -100,6 +102,7 @@ class App extends React.Component {
 
   handleChangeConfirmU26 = () => { this.setState({ isConfirmedU26: !this.state.isConfirmedU26 }) }
 
+  handleChangeConfirmWorkplace = () => { this.setState({ isConfirmeWorkplace: !this.state.isConfirmeWorkplace})}
   handleChangeCity = (e) => { if (e.target.value.length > 0) { this.setState({ city: e.target.value, active: false }) } else { this.setState({ city: "Warszawa", active: true }) } }
 
   handleClickLocal = (e) => {
@@ -134,8 +137,9 @@ class App extends React.Component {
     if (brutto < 0) { brutto = 0 };
     let zus;
     zus = Math.round(brutto * 0.1371 * 100) / 100;
-    let kos_doch;
-    if (brutto < 250) { kos_doch = brutto } else { kos_doch = 250 }
+    let kos_doch = 250;
+    if (brutto < 250) { kos_doch = brutto }
+    if(this.state.isConfirmeWorkplace){kos_doch = 300}
     const pod_zdr = brutto - zus;
     let zdr = Math.round(pod_zdr * 0.09 * 100) / 100;
 
@@ -155,14 +159,24 @@ class App extends React.Component {
     netto = netto.replace('.', ',');
     const Netto = () => netto;
 
-    const Wynik = () => { return (<p className="wynik">Wynagrodzenie netto wynosi:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '2px' }}><Netto /></span> PLN</p>) }
+    const Wynik = () => { return (<p className="wynik">Miesięczne wynagrodzenie netto wynosi:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '2px' }}><Netto /></span> PLN</p>) }
 
     return <div>
       <header><Wynik />
-        <nav><div id="tytul"><h1>Kalkulator Wynagrodzeń</h1><br /><strong>dla pracowników z uwzględnieniem stawki godzinowej, urlopu, pracy w dni wolne i świąteczne, pobytu na zwolnieniu lekarskim, dodatków, uczestnictwa w PPK, drugiego progu podatkowego, ulgi dla młodych</strong><br />
+        <nav><div id="tytul"><h1><u>Kalkulator Wynagrodzeń</u></h1><br/><div className='box'><strong><p>- dla pracowników zatrudnionych na umowie o pracę rozliczanych za pomocą stawki godzinowej</p><p>- przelicznik BRUTTO na NETTO</p></strong></div>
         </div>
         </nav>
       </header>
+<br/>
+      <fieldset><legend><strong><u>wstępne opcje</u></strong></legend><br />
+          <div class='box'>
+          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz, jeśli nie uczestniczysz w PPK</label><br /><br />
+          <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz, jeśli twój wiek jest poniżej 26 lat</label><br /><br />
+          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zaznacz, jeśli twój zakład pracy znajduje się poza miejscowością, w której mieszkasz</label><br /><br />
+          <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label>
+        </div>
+        </fieldset>
+
       <section><ol id="list">
 
         <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny} /></li>
@@ -185,17 +199,11 @@ class App extends React.Component {
 
         <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
         </ol>
-        <fieldset><legend><strong>Dodatkowe opcje</strong></legend><br />
-          <div class='box'><label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br /><br />
-          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz jeśli nie uczestniczysz w PPK</label><br /><br />
-          <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz jeśli twój wiek jest poniżej 26 lat</label>
-        </div>
-        </fieldset>
 
-        <div id='constInp'><Input content='Przelicznik BRUTTO na NETTO' method={this.handleChangeAdd} /></div>
+        <div id='constInp'><u><Input content="przelicznik BRUTTO na NETTO" method={this.handleChangeAdd} /></u></div>
 
         <article>
-          <div className="list"><p><b>Dane szczegółowe:</b></p><br />
+          <div className="list"><p><i><b><u>tabela kwot:</u></b></i></p>
             <table>
               <thead>
                 <tr>
@@ -235,7 +243,7 @@ class App extends React.Component {
         </p><p>
           Pozatym należy zwrócić uwagę na właściwe zaznaczenie w "dodatkowych opcjach" pól związanych z tematem przekroczenia drugiego progu podatkowego, braku uczestnictwa w Pracowniczych Planach Kapitałowych oraz wieku podatnika. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
         </p>
-        <p>Użycie <strong>Przelicznika BRUTTO na NETTO</strong> wymaga oczyszczenia poz.1-10 oraz zaznaczenia odpowiednich pozycji w "dodatkowych opcjach".</p>
+        <p>Użycie <strong>przelicznika BRUTTO na NETTO</strong> wymaga zaznaczenia odpowiednich pozycji we "wstępnych opcjach" oraz oczyszczenia poz.1-10.</p>
         <p>
           Od 1 stycznia 2023 roku obowiązuje nowy wzór <strong>PIT-2</strong>. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:
           <p>- możliwość dzielenia kwoty zmniejszającej podatek między maksymalnie 3 płatników - do tej pory kwota zmniejszająca podatek mogła być stosowana tylko przez jednego płatnika. Nowy PIT-2 pozwala na podzielenie kwoty zmniejszającej podatek między trzech płatników, w tym między pracodawcę, zleceniodawcę i ZUS</p>
@@ -247,7 +255,7 @@ class App extends React.Component {
           Kalkulator Wynagrodzeń to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
       </div></section>
 
-      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button onClick={this.handleClickLocal} style={{ width: "2.5em", height: "2.78em", borderRadius: "15%", outline: "none", marginLeft: "1em" }}>🛰️</button><br /><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
+      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button type='button' value="okiooooppoo" onClick={this.handleClickLocal} style={{ width: "2.7em", height: "3.0em", borderRadius: "15%", outline: "none", marginLeft: "1em", backgroundImage: `url(${geo})`, backgroundRepeat: "no-repeat", position:"relative", top:"1em"}}/><br/><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
     </div>
   }
 }
