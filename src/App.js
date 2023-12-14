@@ -80,7 +80,7 @@ class App extends React.Component {
 
   handleChangeStawka = (e) => { this.setState({ rate: e.target.value }) }
 
-  handleChangeWorkdays = (e) => { if (e.target.value > 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } }
+  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } }
 
   handleChangeSatsun = (e) => { if(e.target.value > 0 && e.target.value <= 216){this.setState({ satsun: e.target.value })} else{this.setState({satsun: 0})} }
 
@@ -159,7 +159,7 @@ class App extends React.Component {
     netto = netto.replace('.', ',');
     const Netto = () => netto;
 
-    const Wynik = () => { return (<p className="wynik">Miesięczne wynagrodzenie netto wynosi:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '2px' }}><Netto /></span> PLN</p>) }
+    const Wynik = () => { return (<p className="wynik">Miesięczne wynagrodzenie netto:<br /><span style={{ color: '#FD5B35', fontSize: '1.5em', letterSpacing: '2px' }}><Netto /></span> PLN</p>) }
 
     return <div>
       <header><Wynik />
