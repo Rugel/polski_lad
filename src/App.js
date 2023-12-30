@@ -163,7 +163,7 @@ class App extends React.Component {
 
     return <div>
       <header><Wynik />
-        <nav><div id="tytul"><h1><u>Kalkulator Wynagrodzeń</u></h1><br/><div className='box'><strong><p>- dla pracowników zatrudnionych na umowie o pracę rozliczanych za pomocą stawki godzinowej</p><p>- przelicznik BRUTTO na NETTO</p></strong></div>
+        <nav><div id="tytul"><u><h1>Kalkulator Wynagrodzeń</h1></u><br/><div className='box'><strong><p>- dla pracowników zatrudnionych na umowę o pracę rozliczanych za pomocą stawki godzinowej</p><p>- przelicznik BRUTTO na NETTO</p></strong></div>
         </div>
         </nav>
       </header>
@@ -172,7 +172,7 @@ class App extends React.Component {
           <div class='box'>
           <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz, jeśli nie uczestniczysz w PPK</label><br /><br />
           <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz, jeśli twój wiek jest poniżej 26 lat</label><br /><br />
-          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zaznacz, jeśli twój zakład pracy znajduje się poza miejscowością, w której mieszkasz</label><br /><br />
+          <label><input type='checkbox' id="workplace" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zaznacz, jeśli twój zakład pracy znajduje się poza miejscowością, w której mieszkasz</label><br /><br />
           <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label>
         </div>
         </fieldset>
@@ -241,7 +241,7 @@ class App extends React.Component {
           — poz.8 i 9 służy do obliczenia średniego wynagrodzenia do celów naliczenia kwot za urlop lub „zwolnienie lekarskie” - jeśli nie korzystałeś z powyższych, możesz nic nie wpisywać <br />
           — w poz.10 wpisujemy sumę kwot brutto ewentualnych dodatków typu premia, mieszkaniówka — jeśli takowych nie ma — pole pozostaje puste.
         </p><p>
-          Pozatym należy zwrócić uwagę na właściwe zaznaczenie w "dodatkowych opcjach" pól związanych z tematem przekroczenia drugiego progu podatkowego, braku uczestnictwa w Pracowniczych Planach Kapitałowych oraz wieku podatnika. PPK to program, który pomaga uzyskać pracownikom oszczędności na przyszłość. Pracownik zapisywany jest do programu automatycznie, a jeśli chce z niego zrezygnować, musi złożyć deklarację. PPK to dobrowolny, prywatny system długoterminowego oszczędzania wchodzący w skład tzw. III filaru polskiego systemu emerytalnego. Jest on tworzony wspólnie przez pracownika, pracodawcę oraz państwo.
+          Pozatym należy zwrócić uwagę na właściwe zaznaczenie we "stępnych opcjach" pól związanych z tematem braku uczestnictwa w Pracowniczych Planach Kapitałowych, wieku podatnika, pracą poza miejscowością zamieszkania oraz przekroczenia drugiego progu podatkowego.
         </p>
         <p>Użycie <strong>przelicznika BRUTTO na NETTO</strong> wymaga zaznaczenia odpowiednich pozycji we "wstępnych opcjach" oraz oczyszczenia poz.1-10.</p>
         <p>
@@ -255,7 +255,7 @@ class App extends React.Component {
           Kalkulator Wynagrodzeń to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
       </div></section>
 
-      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button type='button' value="okiooooppoo" onClick={this.handleClickLocal} style={{ width: "2.7em", height: "3.0em", borderRadius: "15%", outline: "none", marginLeft: "1em", backgroundImage: `url(${geo})`, backgroundRepeat: "no-repeat", position:"relative", top:"1em"}}/><br/><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
+      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button type='button' aria-label='gps_local' onClick={this.handleClickLocal} style={{ width: "2.7em", height: "3.0em", borderRadius: "15%", outline: "none", marginLeft: "1em", backgroundImage: `url(${geo})`, backgroundRepeat: "no-repeat", position:"relative", top:"1em"}}/><br/><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
     </div>
   }
 }

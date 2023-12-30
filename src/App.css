@@ -98,11 +98,11 @@ footer {
 .box {
 text-align: left;
 padding-left: 2em;
-padding-bottom: 2em;
+padding-bottom: 1em;
 }
 
 #box,
-#ppk,#u26 {
+#ppk, #u26, #workplace {
   margin-right: 1em;
   height: 2em;
   width: 2em;
@@ -192,17 +192,18 @@ p{
   opacity:1;
 }
 legend{
-  padding: .6em;
-  background-color:#eeffee;
-  box-shadow: 0px 0px 15px black;
-  border-radius: .5em;
+  padding: 1em;
 }
 fieldset{
   max-width: 90%;
   width:max-content;
-  padding-left: 2em;
+  padding-left: 1em;
   padding-right: 2em;
   border-radius: .5em;
   margin-bottom: 1em;
   margin: auto;
+}
+#town{
+  color:blue;
+  font-weight: bolder;
 }
