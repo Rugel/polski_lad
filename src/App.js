@@ -76,25 +76,25 @@ class App extends React.Component {
 
 
 
-  handleChangeGodziny = (e) => { if(e.target.value >= 0 && e.target.value <= 744){this.setState({ hours: e.target.value })} else {this.setState({hours: 168})} }
+  handleChangeGodziny = (e) => { if(e.target.value >= 0 && e.target.value <= 744){this.setState({ hours: e.target.value })} else {this.setState({hours: 168})} if(e.target.value < 0 || e.target.value > 744){alert('Wpisywana liczba musi się mieścić w przedziale 0 - 744')} }
 
   handleChangeStawka = (e) => { this.setState({ rate: e.target.value }) }
 
-  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } }
+  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0 ){alert('Wpisywana liczba musi się mieścić w przedziale 19 - 23')} }
 
-  handleChangeSatsun = (e) => { if(e.target.value > 0 && e.target.value <= 216){this.setState({ satsun: e.target.value })} else{this.setState({satsun: 0})} }
+  handleChangeSatsun = (e) => { if(e.target.value > 0 && e.target.value <= 216){this.setState({ satsun: e.target.value })} else{this.setState({satsun: 0})} if(e.target.value < 0 || e.target.value > 216) {alert('Wpisywana liczba musi się mieścić w przedziale 0 - 216')} }
 
-  handleChangeUrlop = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays ) {this.setState({ hollydays: e.target.value })} else{this.setState({hollydays: 0})} }
+  handleChangeUrlop = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays ) {this.setState({ hollydays: e.target.value })} else{this.setState({hollydays: 0})} if(e.target.value < 0 || e.target.value > this.state.workdays){alert('Wpisana liczba nie może być większa od liczby dni roboczych')} }
 
-  handleChangeCh1 = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays) {this.setState({ illnessworkdays: e.target.value })} else{this.setState({illnessworkdays: 0})} }
+  handleChangeCh1 = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays) {this.setState({ illnessworkdays: e.target.value })} else{this.setState({illnessworkdays: 0})} if(e.target.value < 0 || e.target.value > this.state.workdays){alert('Wpisana liczba nie może być większa od liczby dni roboczych')} }
 
-  handleChangeCh2 = (e) => { if(e.target.value > 0 && e.target.value <= 10) {this.setState({ illnessweekenddays: e.target.value })}else{this.setState({illnessweekenddays: 0})} }
+  handleChangeCh2 = (e) => { if(e.target.value > 0 && e.target.value <= 10) {this.setState({ illnessweekenddays: e.target.value })}else{this.setState({illnessweekenddays: 0})} if(e.target.value < 0 || e.target.value > 10){alert('Wpisana liczba musi się mieścić w przedziale 0 - 10')} }
 
-  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744){ this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 }) } }
+  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744){ this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 })} if(e.target.value < 0 || e.target.value > 744){alert('Wpisywana liczba musi się mieścić w przedziale 0 - 744')} }
 
-  handleChangeSrWyp = (e) => { if (e.target.value.length > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 }) } }
+  handleChangeSrWyp = (e) => { if (e.target.value.length > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 })} if(e.target.value < 0 ){alert('Wpisywana kwota nie może być ujemna')} }
 
-  handleChangeAdd = (e) => { this.setState({ add: e.target.value }) }
+  handleChangeAdd = (e) => { if (e.target.value.length > 0) { this.setState({ add: e.target.value }) } else { this.setState({ add: 0 })} if(e.target.value < 0 ){alert('Wpisywana kwota nie może być ujemna')} }
 
   handleChangeConfirm = () => { this.setState({ isConfirmed: !this.state.isConfirmed }) }
 
@@ -167,8 +167,7 @@ class App extends React.Component {
         </div>
         </nav>
       </header>
-<br/>
-      <fieldset><legend><strong><u>wstępne opcje</u></strong></legend><br />
+      <fieldset><legend><strong><u>wstępne opcje</u></strong></legend>
           <div class='box'>
           <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz, jeśli nie uczestniczysz w PPK</label><br /><br />
           <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz, jeśli twój wiek jest poniżej 26 lat</label><br /><br />
