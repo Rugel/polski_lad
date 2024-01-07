@@ -27,6 +27,7 @@ class App extends React.Component {
     avaragehours: 168,
     avaragemoney: 7005.76,
     add: 0,
+    BaN: 0,
     isConfirmed: false,
     isConfirmedPpk: false,
     isConfirmedU26: false,
@@ -76,25 +77,27 @@ class App extends React.Component {
 
 
 
-  handleChangeGodziny = (e) => { if(e.target.value >= 0 && e.target.value <= 744){this.setState({ hours: e.target.value })} else {this.setState({hours: 168})} if(e.target.value < 0 || e.target.value > 744){alert('Wpisywana liczba musi się mieścić w przedziale 0 - 744')} }
+  handleChangeGodziny = (e) => { if (e.target.value >= 0 && e.target.value <= 744) { this.setState({ hours: e.target.value }) } else { this.setState({ hours: 168 }) } if (e.target.value < 0 || e.target.value > 744) { alert('Liczba musi się mieścić w przedziale 0 - 744') } }
 
   handleChangeStawka = (e) => { this.setState({ rate: e.target.value }) }
 
-  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0 ){alert('Wpisywana liczba musi się mieścić w przedziale 19 - 23')} }
+  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0) { alert('Wpisywana liczba musi się mieścić w przedziale 19 - 23') } }
 
-  handleChangeSatsun = (e) => { if(e.target.value > 0 && e.target.value <= 216){this.setState({ satsun: e.target.value })} else{this.setState({satsun: 0})} if(e.target.value < 0 || e.target.value > 216) {alert('Wpisywana liczba musi się mieścić w przedziale 0 - 216')} }
+  handleChangeSatsun = (e) => { if (e.target.value > 0 && e.target.value <= 216) { this.setState({ satsun: e.target.value }) } else { this.setState({ satsun: 0 }) } if (e.target.value < 0 || e.target.value > 216) { alert('Liczba musi się mieścić w przedziale 0 - 216') } }
 
-  handleChangeUrlop = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays ) {this.setState({ hollydays: e.target.value })} else{this.setState({hollydays: 0})} if(e.target.value < 0 || e.target.value > this.state.workdays){alert('Wpisana liczba nie może być większa od liczby dni roboczych')} }
+  handleChangeUrlop = (e) => { if (e.target.value > 0 && e.target.value <= this.state.workdays) { this.setState({ hollydays: e.target.value }) } else { this.setState({ hollydays: 0 }) } if (e.target.value < 0 || e.target.value > this.state.workdays) { alert('Liczba nie może być większa od liczby dni roboczych') } }
 
-  handleChangeCh1 = (e) => { if(e.target.value > 0 && e.target.value <= this.state.workdays) {this.setState({ illnessworkdays: e.target.value })} else{this.setState({illnessworkdays: 0})} if(e.target.value < 0 || e.target.value > this.state.workdays){alert('Wpisana liczba nie może być większa od liczby dni roboczych')} }
+  handleChangeCh1 = (e) => { if (e.target.value > 0 && e.target.value <= this.state.workdays) { this.setState({ illnessworkdays: e.target.value }) } else { this.setState({ illnessworkdays: 0 }) } if (e.target.value < 0 || e.target.value > this.state.workdays) { alert('Liczba nie może być większa od liczby dni roboczych') } }
 
-  handleChangeCh2 = (e) => { if(e.target.value > 0 && e.target.value <= 10) {this.setState({ illnessweekenddays: e.target.value })}else{this.setState({illnessweekenddays: 0})} if(e.target.value < 0 || e.target.value > 10){alert('Wpisana liczba musi się mieścić w przedziale 0 - 10')} }
+  handleChangeCh2 = (e) => { if (e.target.value > 0 && e.target.value <= 10) { this.setState({ illnessweekenddays: e.target.value }) } else { this.setState({ illnessweekenddays: 0 }) } if (e.target.value < 0 || e.target.value > 10) { alert('Liczba musi się mieścić w przedziale 0 - 10') } }
 
-  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744){ this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 })} if(e.target.value < 0 || e.target.value > 744){alert('Wpisywana liczba musi się mieścić w przedziale 0 - 744')} }
+  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744) { this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 }) } if (e.target.value < 0 || e.target.value > 744) { alert('Liczba musi się mieścić w przedziale 0 - 744') } }
 
-  handleChangeSrWyp = (e) => { if (e.target.value.length > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 })} if(e.target.value < 0 ){alert('Wpisywana kwota nie może być ujemna')} }
+  handleChangeSrWyp = (e) => { if (e.target.value > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 }) } if (e.target.value < 0) { alert('Kwota nie może być ujemna') } }
 
-  handleChangeAdd = (e) => { if (e.target.value.length > 0) { this.setState({ add: e.target.value }) } else { this.setState({ add: 0 })} if(e.target.value < 0 ){alert('Wpisywana kwota nie może być ujemna')} }
+  handleChangeAdd = (e) => { if (e.target.value >= 0) { this.setState({ add: e.target.value }) } else if (e.target.value < 0) { this.setState({ add: 0 }); alert('Kwota nie może być ujemna') } }
+
+  handleChangeBaN = (e) => { if (e.target.value >= 0) { this.setState({ BaN: e.target.value }) } else if (e.target.value < 0) { this.setState({ BaN: 0 }); alert('Kwota nie może być ujemna') } }
 
   handleChangeConfirm = () => { this.setState({ isConfirmed: !this.state.isConfirmed }) }
 
@@ -102,7 +105,7 @@ class App extends React.Component {
 
   handleChangeConfirmU26 = () => { this.setState({ isConfirmedU26: !this.state.isConfirmedU26 }) }
 
-  handleChangeConfirmWorkplace = () => { this.setState({ isConfirmeWorkplace: !this.state.isConfirmeWorkplace})}
+  handleChangeConfirmWorkplace = () => { this.setState({ isConfirmeWorkplace: !this.state.isConfirmeWorkplace }) }
   handleChangeCity = (e) => { if (e.target.value.length > 0) { this.setState({ city: e.target.value, active: false }) } else { this.setState({ city: "Warszawa", active: true }) } }
 
   handleClickLocal = (e) => {
@@ -127,6 +130,9 @@ class App extends React.Component {
     const count = () => { return (hours * rate + nadgodz * rate * 0.5 + satsun * rate * 0.5 + hollydays * 8 * avaragemoney / avaragehours + illnessworkdays * avaragemoney / 30 * 0.8 + illnessweekenddays * avaragemoney / 30 * 0.8 + add * 1) };
     let brutto = Math.round(count() * 100) / 100;
 
+    //warunek dla przelicznika Brutto na Netto
+    if (this.state.BaN) { brutto = this.state.BaN };
+
     //wyliczenie składek
     let ppk;
     let ppk_bru;
@@ -135,11 +141,12 @@ class App extends React.Component {
       ppk_bru = Math.round(brutto * 1.015 * 100) / 100;
     }
     if (brutto < 0) { brutto = 0 };
+
     let zus;
     zus = Math.round(brutto * 0.1371 * 100) / 100;
     let kos_doch = 250;
     if (brutto < 250) { kos_doch = brutto }
-    if(this.state.isConfirmeWorkplace){kos_doch = 300}
+    if (this.state.isConfirmeWorkplace) { kos_doch = 300 }
     const pod_zdr = brutto - zus;
     let zdr = Math.round(pod_zdr * 0.09 * 100) / 100;
 
@@ -163,18 +170,18 @@ class App extends React.Component {
 
     return <div>
       <header><Wynik />
-        <nav><div id="tytul"><u><h1>Kalkulator Wynagrodzeń</h1></u><br/><div className='box'><strong><p>- dla pracowników zatrudnionych na umowę o pracę rozliczanych za pomocą stawki godzinowej</p><p>- przelicznik BRUTTO na NETTO</p></strong></div>
+        <nav><div id="tytul"><u><h1>Kalkulator Wynagrodzeń</h1></u><br /><div className='box'><strong><p>- dla pracowników zatrudnionych na umowę o pracę rozliczanych za pomocą stawki godzinowej</p><p>- przelicznik BRUTTO na NETTO</p></strong></div>
         </div>
         </nav>
       </header>
       <fieldset><legend><strong><u>wstępne opcje</u></strong></legend>
-          <div class='box'>
+        <div class='box'>
           <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz, jeśli nie uczestniczysz w PPK</label><br /><br />
           <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz, jeśli twój wiek jest poniżej 26 lat</label><br /><br />
           <label><input type='checkbox' id="workplace" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zaznacz, jeśli twój zakład pracy znajduje się poza miejscowością, w której mieszkasz</label><br /><br />
           <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label>
         </div>
-        </fieldset>
+      </fieldset>
 
       <section><ol id="list">
 
@@ -197,9 +204,9 @@ class App extends React.Component {
         <li><Input content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld={this.state.avaragemoney} /></li>
 
         <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
-        </ol>
+      </ol>
 
-        <div id='constInp'><u><Input content="przelicznik BRUTTO na NETTO" method={this.handleChangeAdd} /></u></div>
+        <div id='constInp'><u><Input content="przelicznik BRUTTO na NETTO" method={this.handleChangeBaN} /></u></div>
 
         <article>
           <div className="list"><p><i><b><u>tabela kwot:</u></b></i></p>
@@ -242,7 +249,7 @@ class App extends React.Component {
         </p><p>
           Pozatym należy zwrócić uwagę na właściwe zaznaczenie we "stępnych opcjach" pól związanych z tematem braku uczestnictwa w Pracowniczych Planach Kapitałowych, wieku podatnika, pracą poza miejscowością zamieszkania oraz przekroczenia drugiego progu podatkowego.
         </p>
-        <p>Użycie <strong>przelicznika BRUTTO na NETTO</strong> wymaga zaznaczenia odpowiednich pozycji we "wstępnych opcjach" oraz oczyszczenia poz.1-10.</p>
+        <p>Użycie <strong>przelicznika BRUTTO na NETTO</strong> wymaga zaznaczenia odpowiednich pozycji we "wstępnych opcjach" oraz wpisania żądanej do przeliczenia kwoty brutto.</p>
         <p>
           Od 1 stycznia 2023 roku obowiązuje nowy wzór <strong>PIT-2</strong>. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:
           <p>- możliwość dzielenia kwoty zmniejszającej podatek między maksymalnie 3 płatników - do tej pory kwota zmniejszająca podatek mogła być stosowana tylko przez jednego płatnika. Nowy PIT-2 pozwala na podzielenie kwoty zmniejszającej podatek między trzech płatników, w tym między pracodawcę, zleceniodawcę i ZUS</p>
@@ -254,7 +261,7 @@ class App extends React.Component {
           Kalkulator Wynagrodzeń to z założenia prosty i szybki sposób, abyś mógł się zorientować, ile faktycznie dostaniesz na konto za swoją pracę.</p>
       </div></section>
 
-      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button type='button' aria-label='gps_local' onClick={this.handleClickLocal} style={{ width: "2.7em", height: "3.0em", borderRadius: "15%", outline: "none", marginLeft: "1em", backgroundImage: `url(${geo})`, backgroundRepeat: "no-repeat", position:"relative", top:"1em"}}/><br/><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
+      <footer><div><label><span style={{ fontSize: "18px", color: "#ffffff" }}>Pogoda w Twoim mieście: </span><br /><input id='town' className="input" type="text" placeholder={this.state.cityOk} autoComplete="off" style={{ width: "8em", height: "2.3em" }} onChange={this.handleChangeCity}></input></label><button type='button' aria-label='gps_local' onClick={this.handleClickLocal} style={{ width: "2.7em", height: "3.0em", borderRadius: "15%", outline: "none", marginLeft: "1em", backgroundImage: `url(${geo})`, backgroundRepeat: "no-repeat", position: "relative", top: "1em" }} /><br /><br />Aktualna pogoda dla miasta <span className='span'>{this.state.cityOk} - {this.state.country}</span> <span className='span' style={{ fontWeight: "300" }}>({this.state.time})</span>:<br /><img className='icon' src={temp} alt="temperature" /> temp.: <span className='span'>{this.state.temp} &#176;C</span><img className='icon' src={wind} alt="wind" /> wiatr: <span className='span'>{this.state.wiatr} m/s</span><br /> <img className='icon' src={summer} alt="summer" /> stan: <span className='span'>{this.state.stan}</span> <img className='icon' src={pressure} alt="pressure" />  ciśnienie: <span className='span'>{this.state.cisnienie} hPa</span><br /> <img className='icon' src={vision} alt="visibillity" /> widoczność: <span className='span'>{this.state.visibility} m</span> <img className='icon' src={clouds} alt="clouds" /> zachmurzenie:  <span className='span'>{this.state.clouds} %</span><br />{/*<img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon" />*/}</div><br />{/*<Suspense fallback={<div>Ładowanie...</div>}><Nasa /></Suspense>*/}<Footer /></footer>
     </div>
   }
 }
