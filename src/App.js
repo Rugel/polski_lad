@@ -81,7 +81,7 @@ class App extends React.Component {
 
   handleChangeStawka = (e) => { this.setState({ rate: e.target.value }) }
 
-  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0) { alert('Wpisywana liczba musi się mieścić w przedziale 19 - 23') } }
+  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0) { alert('Liczba musi się mieścić w przedziale 19 - 23') } }
 
   handleChangeSatsun = (e) => { if (e.target.value > 0 && e.target.value <= 216) { this.setState({ satsun: e.target.value }) } else { this.setState({ satsun: 0 }) } if (e.target.value < 0 || e.target.value > 216) { alert('Liczba musi się mieścić w przedziale 0 - 216') } }
 

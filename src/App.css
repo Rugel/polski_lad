@@ -10,7 +10,7 @@ body {
   right: 0;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
-  background-image: url(images/pattern.png);
+  background-image: url(images/pattern.webp);
 }
 
 .disclaimer,
@@ -50,6 +50,7 @@ h1{
   transition: .5s;
   border-radius: .35em;
   margin-top: .5em;
+  border: none;
 }
 
 .input:focus {
@@ -139,7 +140,8 @@ padding-bottom: 1em;
   padding: 2em;
   background-color: #99ff99;
   font-weight: 600;
-  max-width: 90%;
+  max-width: 80%;
+  border:solid 1px;
   border-radius: .35em;
   margin: auto;
 }
@@ -158,9 +160,8 @@ padding-bottom: 1em;
 
 ol li {
   padding: 1em;
-  border: 1px solid lightgrey;
+  border: 1px solid;
   margin: 1em;
-  background-color: #eeffee;
   border-radius: .5em;
   flex-grow: 1;
 }
