@@ -9,6 +9,7 @@ import pressure from './icons/pressure.svg';
 import summer from './icons/summer.svg';
 import vision from './icons/vision.svg';
 import geo from './icons/geo-alt.svg';
+import swal from '@sweetalert/with-react';
 //import Nasa from './modules/nasa';
 
 //const Nasa = lazy(() => import('./modules/nasa'))
@@ -77,27 +78,27 @@ class App extends React.Component {
 
 
 
-  handleChangeGodziny = (e) => { if (e.target.value >= 0 && e.target.value <= 744) { this.setState({ hours: e.target.value }) } else { this.setState({ hours: 168 }) } if (e.target.value < 0 || e.target.value > 744) { alert('Liczba musi się mieścić w przedziale 0 - 744') } }
+  handleChangeGodziny = (e) => { if (e.target.value >= 0 && e.target.value <= 744) { this.setState({ hours: e.target.value }) } else { this.setState({ hours: 168 }) } if (e.target.value < 0 || e.target.value > 744) { swal("Liczba musi się mieścić w przedziale 0 - 744") } }
 
-  handleChangeStawka = (e) => { this.setState({ rate: e.target.value }) }
+  handleChangeStawka = (e) => { if(e.target.value>=0){this.setState({ rate: e.target.value })}else{this.setState({rate:0}); swal('Liczba nie może być ujemna')} }
 
-  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0) { alert('Liczba musi się mieścić w przedziale 19 - 23') } }
+  handleChangeWorkdays = (e) => { if (e.target.value >= 19 && e.target.value < 24) { this.setState({ workdays: e.target.value }) } else { this.setState({ workdays: 21 }) } if ((e.target.value > 2 && e.target.value < 19) || e.target.value > 23 || e.target.value < 0) { swal('Liczba musi się mieścić w przedziale 19 - 23') } }
 
-  handleChangeSatsun = (e) => { if (e.target.value > 0 && e.target.value <= 216) { this.setState({ satsun: e.target.value }) } else { this.setState({ satsun: 0 }) } if (e.target.value < 0 || e.target.value > 216) { alert('Liczba musi się mieścić w przedziale 0 - 216') } }
+  handleChangeSatsun = (e) => { if (e.target.value > 0 && e.target.value <= 288) { this.setState({ satsun: e.target.value }) } else { this.setState({ satsun: 0 }) } if (e.target.value < 0 || e.target.value > 288) { swal('Liczba musi się mieścić w przedziale 0 - 288') } }
 
-  handleChangeUrlop = (e) => { if (e.target.value > 0 && e.target.value <= this.state.workdays) { this.setState({ hollydays: e.target.value }) } else { this.setState({ hollydays: 0 }) } if (e.target.value < 0 || e.target.value > this.state.workdays) { alert('Liczba nie może być większa od liczby dni roboczych') } }
+  handleChangeUrlop = (e) => { if (e.target.value > 0 && e.target.value <= this.state.workdays) { this.setState({ hollydays: e.target.value }) } else { this.setState({ hollydays: 0 }) } if (e.target.value < 0 || e.target.value > this.state.workdays) { swal('Liczba nie może być większa od liczby dni roboczych') } }
 
-  handleChangeCh1 = (e) => { if (e.target.value > 0 && e.target.value <= this.state.workdays) { this.setState({ illnessworkdays: e.target.value }) } else { this.setState({ illnessworkdays: 0 }) } if (e.target.value < 0 || e.target.value > this.state.workdays) { alert('Liczba nie może być większa od liczby dni roboczych') } }
+  handleChangeCh1 = (e) => { if (e.target.value > 0 && e.target.value <= this.state.workdays) { this.setState({ illnessworkdays: e.target.value }) } else { this.setState({ illnessworkdays: 0 }) } if (e.target.value < 0 || e.target.value > this.state.workdays) { swal('Liczba nie może być większa od liczby dni roboczych') } }
 
-  handleChangeCh2 = (e) => { if (e.target.value > 0 && e.target.value <= 10) { this.setState({ illnessweekenddays: e.target.value }) } else { this.setState({ illnessweekenddays: 0 }) } if (e.target.value < 0 || e.target.value > 10) { alert('Liczba musi się mieścić w przedziale 0 - 10') } }
+  handleChangeCh2 = (e) => { if (e.target.value > 0 && e.target.value <= 12) { this.setState({ illnessweekenddays: e.target.value }) } else { this.setState({ illnessweekenddays: 0 }) } if (e.target.value < 0 || e.target.value > 12) { swal('Liczba musi się mieścić w przedziale 0 - 12') } }
 
-  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744) { this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 }) } if (e.target.value < 0 || e.target.value > 744) { alert('Liczba musi się mieścić w przedziale 0 - 744') } }
+  handleChangeSrGodz = (e) => { if (e.target.value > 0 && e.target.value <= 744) { this.setState({ avaragehours: e.target.value }) } else { this.setState({ avaragehours: 168 }) } if (e.target.value < 0 || e.target.value > 744) { swal('Liczba musi się mieścić w przedziale 0 - 744') } }
 
-  handleChangeSrWyp = (e) => { if (e.target.value > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 }) } if (e.target.value < 0) { alert('Kwota nie może być ujemna') } }
+  handleChangeSrWyp = (e) => { if (e.target.value > 0) { this.setState({ avaragemoney: e.target.value }) } else { this.setState({ avaragemoney: 7005.76 }) } if (e.target.value < 0) { swal('Kwota nie może być ujemna') } }
 
-  handleChangeAdd = (e) => { if (e.target.value >= 0) { this.setState({ add: e.target.value }) } else if (e.target.value < 0) { this.setState({ add: 0 }); alert('Kwota nie może być ujemna') } }
+  handleChangeAdd = (e) => { if (e.target.value >= 0) { this.setState({ add: e.target.value }) } else if (e.target.value < 0) { this.setState({ add: 0 }); swal('Kwota nie może być ujemna') } }
 
-  handleChangeBaN = (e) => { if (e.target.value >= 0) { this.setState({ BaN: e.target.value }) } else if (e.target.value < 0) { this.setState({ BaN: 0 }); alert('Kwota nie może być ujemna') } }
+  handleChangeBaN = (e) => { if (e.target.value >= 0) { this.setState({ BaN: e.target.value }) } else if (e.target.value < 0) { this.setState({ BaN: 0 }); swal('Kwota nie może być ujemna') } }
 
   handleChangeConfirm = () => { this.setState({ isConfirmed: !this.state.isConfirmed }) }
 
@@ -175,11 +176,11 @@ class App extends React.Component {
         </nav>
       </header>
       <fieldset><legend><strong><u>wstępne opcje</u></strong></legend>
-        <div class='box'>
-          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />zaznacz, jeśli nie uczestniczysz w PPK</label><br /><br />
-          <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />zaznacz, jeśli twój wiek jest poniżej 26 lat</label><br /><br />
-          <label><input type='checkbox' id="workplace" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zaznacz, jeśli twój zakład pracy znajduje się poza miejscowością, w której mieszkasz</label><br /><br />
-          <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label>
+        <div className='box'>
+          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />brak uczestnictwa w w PPK</label><br /><br />
+          <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />wiek poniżej 26 lat</label><br /><br />
+          <label><input type='checkbox' id="workplace" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zakład pracy znajduje się poza miejscowością zamieszkania</label><br /><br />
+          <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaliczka na podatek dochodowy jest pobierana wg drugiego progu</label>
         </div>
       </fieldset>
 
@@ -251,10 +252,10 @@ class App extends React.Component {
         </p>
         <p>Użycie <strong>przelicznika BRUTTO na NETTO</strong> wymaga zaznaczenia odpowiednich pozycji we "wstępnych opcjach" oraz wpisania żądanej do przeliczenia kwoty brutto.</p>
         <p>
-          Od 1 stycznia 2023 roku obowiązuje nowy wzór <strong>PIT-2</strong>. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:
+          Od 1 stycznia 2023 roku obowiązuje nowy wzór <strong>PIT-2</strong>. Formularz ten składa się raz w roku, w celu upoważnienia płatnika (np. pracodawcy, zleceniodawcy) do zmniejszania zaliczki na podatek dochodowy o kwotę zmniejszającą podatek. Najważniejsze zmiany w nowym PIT-2 to:</p>
           <p>- możliwość dzielenia kwoty zmniejszającej podatek między maksymalnie 3 płatników - do tej pory kwota zmniejszająca podatek mogła być stosowana tylko przez jednego płatnika. Nowy PIT-2 pozwala na podzielenie kwoty zmniejszającej podatek między trzech płatników, w tym między pracodawcę, zleceniodawcę i ZUS</p>
           <p>- zawiera wszystkie wnioski i oświadczenia wpływające na ustalenie zaliczki na podatek dochodowy - do tej pory na formularzu PIT-2 składało się tylko oświadczenie o stosowaniu kwoty zmniejszającej podatek wynikającej z kwoty wolnej od podatku.</p>
-          Nowy PIT-2 można złożyć w dowolnym momencie roku, jednak najlepiej zrobić to zaraz po podjęciu pracy.<br /><a href="https://www.gov.pl/attachment/7d32c2f6-e428-4824-80fc-bd2f6c07bb0f">PIT-2(9)</a> - link do pobrania formularza PIT-2
+          <p>Nowy PIT-2 można złożyć w dowolnym momencie roku, jednak najlepiej zrobić to zaraz po podjęciu pracy.<br /><a href="https://www.gov.pl/attachment/7d32c2f6-e428-4824-80fc-bd2f6c07bb0f">PIT-2(9)</a> - link do pobrania formularza PIT-2
         </p><p>
           Kalkulator uwzględnia najnowsze przepisy podatkowe i regulacje dotyczące wynagrodzeń. Jeśli potrzebujesz dokładniejszych informacji, zawsze warto skonsultować się z ekspertem finansowym lub działem kadr.
         </p><p>
