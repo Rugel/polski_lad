@@ -132,7 +132,7 @@ class App extends React.Component {
     let brutto = Math.round(count() * 100) / 100;
 
     //warunek dla przelicznika Brutto na Netto
-    if (this.state.BaN) { brutto = this.state.BaN };
+    if(this.state.BaN) { brutto = this.state.BaN };
 
     //wyliczenie składek
     let ppk;
@@ -177,37 +177,37 @@ class App extends React.Component {
       </header>
       <fieldset><legend><strong><u>wstępne opcje</u></strong></legend>
         <div className='box'>
-          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />brak uczestnictwa w w PPK</label><br /><br />
+          <label><input type='checkbox' id="ppk" onChange={this.handleChangeConfirmPpk} checked={this.state.isConfirmedPpk} />brak uczestnictwa w PPK</label><br /><br />
           <label><input type='checkbox' id="u26" onChange={this.handleChangeConfirmU26} checked={this.state.isConfirmedU26} />wiek poniżej 26 lat</label><br /><br />
           <label><input type='checkbox' id="workplace" onChange={this.handleChangeConfirmWorkplace} checked={this.state.isConfirmeWorkplace} />zakład pracy znajduje się poza miejscowością zamieszkania</label><br /><br />
-          <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaliczka na podatek dochodowy jest pobierana wg drugiego progu</label>
+          <label><input type='checkbox' id="box" onChange={this.handleChangeConfirm} checked={this.state.isConfirmed} />zaliczka na podatek dochodowy jest pobierana wg drugiego progu skali podatkowej</label>
         </div>
       </fieldset>
 
       <section><ol id="list">
 
-        <li><Input content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny} /></li>
+        <li><Input name='hours' content='Podaj łączną liczbę przepracowanych godzin w danym miesiącu' method={this.handleChangeGodziny} /></li>
 
-        <li><Input content='Podaj twoją stawkę godzinową brutto' method={this.handleChangeStawka} /></li>
+        <li><Input name='rate' content='Podaj twoją stawkę godzinową brutto' method={this.handleChangeStawka} /></li>
 
-        <li><Input content='Podaj liczbę dni roboczych danego miesiąca' method={this.handleChangeWorkdays} plhld={this.state.workdays} /></li>
+        <li><Input name='workdays' content='Podaj liczbę dni roboczych danego miesiąca' method={this.handleChangeWorkdays} plhld={this.state.workdays} /></li>
 
-        <li><Input content='Podaj łączną liczbę godzin przepracowanych w soboty, niedziele i święta' method={this.handleChangeSatsun} /></li>
+        <li><Input name='sunsat' content='Podaj łączną liczbę godzin przepracowanych w soboty, niedziele i święta' method={this.handleChangeSatsun} /></li>
 
-        <li><Input content='Podaj ilość dni przebytych na urlopie' method={this.handleChangeUrlop} /></li>
+        <li><Input name='hollydays'  content='Podaj ilość dni przebytych na urlopie' method={this.handleChangeUrlop} /></li>
 
-        <li><Input content='Podaj ilość dni powszednich przebytych na zwolnieniu lekarskim' method={this.handleChangeCh1} /></li>
+        <li><Input name='illworkdays' content='Podaj ilość dni powszednich przebytych na zwolnieniu lekarskim' method={this.handleChangeCh1} /></li>
 
-        <li><Input content='Podaj ilość dni wolnych od pracy a przebytych na zwolnieniu lekarskim' method={this.handleChangeCh2} /></li>
+        <li><Input name='illfreedays' content='Podaj ilość dni wolnych od pracy a przebytych na zwolnieniu lekarskim' method={this.handleChangeCh2} /></li>
 
-        <li><Input content='Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrGodz} plhld={this.state.workdays * 8} /></li>
+        <li><Input name='avaragehours' content='Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrGodz} plhld={this.state.workdays * 8} /></li>
 
-        <li><Input content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld={this.state.avaragemoney} /></li>
+        <li><Input name='avaragemoney' content='Podaj kwotę wypłaty brutto uśrednioną z trzech ostatnich miesięcy' method={this.handleChangeSrWyp} plhld={this.state.avaragemoney} /></li>
 
-        <li><Input content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
+        <li><Input name='addmoney' content='Podaj kwotę brutto ewentualnych dodatków typu: premia, mieszkaniówka' method={this.handleChangeAdd} /></li>
       </ol>
 
-        <div id='constInp'><u><Input content="przelicznik BRUTTO na NETTO" method={this.handleChangeBaN} /></u></div>
+        <div id='constInp'><u><Input name='BnN' content="przelicznik BRUTTO na NETTO" method={this.handleChangeBaN} /></u></div>
 
         <article>
           <div className="list"><p><i><b><u>tabela kwot:</u></b></i></p>
