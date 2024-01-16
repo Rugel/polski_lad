@@ -4,15 +4,10 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-<image:image>
-  <image:loc>https://stawka-godzinowa.pl/favicon.ico</image:loc>
-  <image:title>Favicon stawka-godzinowa.pl</image:title>
-</image:image>
-<url>
+ <url>
   <loc>https://stawka-godzinowa.pl/</loc>
+  <changefreq>always</changefreq>
+  <priority>1.0</priority>
   <lastmod>2023-12-15T17:28:10+00:00</lastmod>
-</url>
-
-
+ </url>
 </urlset>
